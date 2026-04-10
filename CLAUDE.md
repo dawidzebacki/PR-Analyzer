@@ -5,7 +5,7 @@ Tool for analyzing GitHub pull requests. Scores PRs on Impact, AI-Leverage, and 
 Landing page style based on passport-photo.online (indigo/purple CTA, PT Serif headings, Inter body, light blue-tinted backgrounds).
 
 ## Stack
-- **Framework:** Next.js 15 (App Router, `src/` directory)
+- **Framework:** Next.js 16 (App Router, `src/` directory)
 - **Language:** TypeScript (strict mode)
 - **Styling:** Tailwind CSS 4 + custom design tokens
 - **Animations:** Framer Motion
@@ -14,6 +14,7 @@ Landing page style based on passport-photo.online (indigo/purple CTA, PT Serif h
 - **Charts:** Recharts
 - **Icons:** Lucide React
 - **LLM:** Anthropic Claude API (claude-opus-4-6)
+- **Runtime/Package manager:** Bun
 - **Deploy:** Vercel
 
 ## Directory Structure
