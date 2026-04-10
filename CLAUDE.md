@@ -12,6 +12,7 @@ Landing page style based on passport-photo.online (indigo/purple CTA, PT Serif h
 - **Data fetching:** TanStack Query v5
 - **Forms:** React Hook Form + Zod
 - **Charts:** Recharts
+- **Storybook:** Storybook 10 (`@storybook/nextjs-vite`)
 - **Icons:** Lucide React
 - **LLM:** Anthropic Claude API (claude-opus-4-6)
 - **Runtime/Package manager:** Bun
