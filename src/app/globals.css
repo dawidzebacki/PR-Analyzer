@@ -71,13 +71,6 @@
   }
 }
 
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-}
-
 body {
   background: var(--color-background);
   color: var(--color-text);
