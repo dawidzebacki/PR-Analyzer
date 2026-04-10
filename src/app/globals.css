@@ -16,6 +16,13 @@
   --color-error: #E04E6A;
   --color-error-bg: #FDE8E8;
 
+  --color-score-red: #E04E6A;
+  --color-score-yellow: #F5A623;
+  --color-score-green: #35BA80;
+
+  --color-btn-disabled-bg: #D8DBE5;
+  --color-btn-disabled-text: #7B8494;
+
   --font-heading: var(--font-pt-serif);
   --font-body: var(--font-inter);
 
@@ -25,10 +32,66 @@
   --radius-xl: 12px;
   --radius-2xl: 16px;
   --radius-full: 36px;
+
+  --animate-fade-in-up: fade-in-up 0.5s ease-out both;
+  --animate-slide-in-left: slide-in-left 0.5s ease-out both;
+  --animate-slide-in-right: slide-in-right 0.5s ease-out both;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
 }
 
 body {
   background: var(--color-background);
   color: var(--color-text);
   font-family: var(--font-body), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), serif;
+  font-weight: 700;
 }

@@ -1,0 +1,34 @@
+// Scoring
+export const SCORING_WEIGHTS = {
+  impact: 0.35,
+  aiLeverage: 0.25,
+  quality: 0.4,
+} as const;
+
+export const SCORE_COLORS = {
+  red: { min: 0, max: 40, color: "score-red" },
+  yellow: { min: 40, max: 70, color: "score-yellow" },
+  green: { min: 70, max: 100, color: "score-green" },
+} as const;
+
+export function getScoreColor(score: number): string {
+  if (score < SCORE_COLORS.red.max) return SCORE_COLORS.red.color;
+  if (score < SCORE_COLORS.yellow.max) return SCORE_COLORS.yellow.color;
+  return SCORE_COLORS.green.color;
+}
+
+// GitHub
+export const GITHUB_API_BASE = "https://api.github.com";
+export const MAX_PRS_TO_ANALYZE = 20;
+
+// Cache
+export const CACHE_TTL_MS = 3_600_000; // 1 hour
+
+// Analysis
+export const ANALYSIS_TIMEOUT_MS = 60_000; // 60s
+
+// App
+export const APP_NAME = "PR Analyzer";
+export const APP_DESCRIPTION =
+  "Analyze GitHub pull requests. Score PRs on Impact, AI-Leverage, and Quality.";
+export const APP_URL = "https://pr-analyzer.vercel.app";

@@ -10,6 +10,8 @@ Will be distilled into README sections (Design Decisions, AI Usage, What I'd Do 
 <!-- Format: what you decided + why, one line each -->
 - Used Next.js 16 instead of 15 — create-next-app installed latest, no reason to downgrade
 - Missing --color-black in globals.css — added per design system spec
+- Tailwind v4 uses CSS-based @theme config, no tailwind.config.ts needed — all design tokens live in globals.css
+- Added .gitattributes with eol=lf to fix CRLF warnings on Windows (core.autocrlf=true globally)
 
 ## Issues & Fixes
 
