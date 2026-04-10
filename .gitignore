@@ -30,6 +30,9 @@ node_modules/
 # MCP config (contains tokens)
 .mcp.json
 
+# Claude Code local settings (machine-specific)
+.claude/settings.local.json
+
 # misc
 .DS_Store
 *.pem

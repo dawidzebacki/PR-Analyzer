@@ -49,6 +49,10 @@ src/
     └── index.ts
 ```
 
+## Workflow
+- Before every commit: run `.claude/review.md` (review all changed files + run lint/tsc/build), report results, wait for user approval
+- To create PR: run `.claude/create-pr.md` (self-review, checks, commit, push, open PR)
+
 ## Code Conventions
 
 ### Naming
