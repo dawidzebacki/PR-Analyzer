@@ -67,6 +67,12 @@
       "description": "Engineering excellence: focused scope, clean code, test coverage, and clear PR descriptions."
     }
   },
+  "preview": {
+    "title": "See Your Dashboard in Action",
+    "subtitle": "A preview of the interactive report you'll get — scores, breakdowns, and PR-level insights at a glance.",
+    "overallScore": "Overall Score",
+    "recentPRs": "Recent Pull Requests"
+  },
   "results": {
     "heading": "Results for {id}"
   },
