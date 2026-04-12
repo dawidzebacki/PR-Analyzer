@@ -1,0 +1,32 @@
+{
+  "common": {
+    "appName": "PR Analyzer",
+    "cta": "Analizuj repozytorium",
+    "loading": "Analizowanie...",
+    "learnMore": "Dowiedz się więcej",
+    "free": "Darmowe",
+    "noLoginRequired": "Bez logowania",
+    "publicReposOnly": "Tylko publiczne repozytoria"
+  },
+  "nav": {
+    "howItWorks": "Jak to działa",
+    "scoring": "Ocenianie",
+    "github": "GitHub"
+  },
+  "hero": {
+    "title": "Analizuj Pull Requesty z pomocą AI",
+    "subtitle": "Uzyskaj natychmiastowe, wspierane przez AI informacje o jakości kodu, wpływie zmian i wykorzystaniu AI w Twoich pull requestach.",
+    "inputPlaceholder": "https://github.com/właściciel/repo",
+    "cta": "Analizuj repozytorium",
+    "trust": "Darmowe • Bez logowania • Tylko publiczne repozytoria"
+  },
+  "results": {
+    "heading": "Wyniki dla {id}"
+  },
+  "footer": {
+    "description": "Narzędzie do analizy pull requestów na GitHubie wspierane przez AI.",
+    "resources": "Zasoby",
+    "product": "Produkt",
+    "copyright": "© 2025 PR Analyzer. Zbudowane z AI."
+  }
+}

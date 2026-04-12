@@ -1,0 +1,32 @@
+{
+  "common": {
+    "appName": "PR Analyzer",
+    "cta": "Analyze Repository",
+    "loading": "Analyzing...",
+    "learnMore": "Learn more",
+    "free": "Free",
+    "noLoginRequired": "No login required",
+    "publicReposOnly": "Public repos only"
+  },
+  "nav": {
+    "howItWorks": "How it Works",
+    "scoring": "Scoring",
+    "github": "GitHub"
+  },
+  "hero": {
+    "title": "Analyze Your GitHub PRs with AI",
+    "subtitle": "Get instant AI-powered insights on code quality, impact, and AI usage across your pull requests.",
+    "inputPlaceholder": "https://github.com/owner/repo",
+    "cta": "Analyze Repository",
+    "trust": "Free • No login required • Public repos only"
+  },
+  "results": {
+    "heading": "Results for {id}"
+  },
+  "footer": {
+    "description": "AI-powered GitHub pull request analysis tool.",
+    "resources": "Resources",
+    "product": "Product",
+    "copyright": "© 2025 PR Analyzer. Built with AI."
+  }
+}
