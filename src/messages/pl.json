@@ -23,6 +23,18 @@
     "cta": "Analizuj repozytorium",
     "trust": "Darmowe • Bez logowania • Tylko publiczne repozytoria"
   },
+  "socialProof": {
+    "label": "Zaufali nam deweloperzy z",
+    "stat": "{count}+ przeanalizowanych repozytoriów",
+    "companies": {
+      "vercel": "Vercel",
+      "stripe": "Stripe",
+      "shopify": "Shopify",
+      "notion": "Notion",
+      "linear": "Linear",
+      "supabase": "Supabase"
+    }
+  },
   "results": {
     "heading": "Wyniki dla {id}"
   },
