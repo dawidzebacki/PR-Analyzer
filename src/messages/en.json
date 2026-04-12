@@ -11,7 +11,10 @@
   "nav": {
     "howItWorks": "How it Works",
     "scoring": "Scoring",
-    "github": "GitHub"
+    "github": "GitHub",
+    "cta": "Get Started",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "hero": {
     "title": "Analyze Your GitHub PRs with AI",
@@ -25,8 +28,28 @@
   },
   "footer": {
     "description": "AI-powered GitHub pull request analysis tool.",
-    "resources": "Resources",
     "product": "Product",
+    "productLinks": {
+      "analyzer": "PR Analyzer",
+      "scoring": "Scoring Model",
+      "api": "API"
+    },
+    "resources": "Resources",
+    "resourceLinks": {
+      "docs": "Documentation",
+      "blog": "Blog",
+      "changelog": "Changelog"
+    },
+    "links": "Links",
+    "legalLinks": {
+      "github": "GitHub",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
     "copyright": "© 2025 PR Analyzer. Built with AI."
+  },
+  "language": {
+    "en": "English",
+    "pl": "Polski"
   }
 }
