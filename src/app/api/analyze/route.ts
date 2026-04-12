@@ -1,0 +1,114 @@
+import { NextResponse } from "next/server";
+
+import { analyzeRequestSchema } from "@/schemas";
+import * as cache from "@/lib/cache";
+import {
+  parseRepoUrl,
+  fetchMergedPRs,
+  GitHubApiError,
+  NoPullRequestsError,
+  RateLimitError,
+  RepoNotFoundError,
+  RepoPrivateError,
+} from "@/lib/github";
+import { scorePullRequests } from "@/lib/scoring";
+import type { ApiResponse } from "@/types/api";
+import type { RepoAnalysis } from "@/types/scoring";
+
+export async function POST(request: Request) {
+  try {
+    const body: unknown = await request.json();
+    const parsed = analyzeRequestSchema.safeParse(body);
+
+    if (!parsed.success) {
+      return NextResponse.json<ApiResponse<never>>(
+        { success: false, error: "Invalid repository URL", code: "INVALID_URL" },
+        { status: 400 },
+      );
+    }
+
+    const { repoUrl } = parsed.data;
+
+    // Check cache first
+    const cacheKey = cache.generateKey(repoUrl);
+    const cached = cache.get(cacheKey);
+    if (cached) {
+      return NextResponse.json<ApiResponse<RepoAnalysis>>({
+        success: true,
+        data: cached,
+      });
+    }
+
+    const { owner, repo } = parseRepoUrl(repoUrl);
+    const token = process.env.GITHUB_TOKEN;
+
+    // Fetch PRs and score them
+    const prs = await fetchMergedPRs(owner, repo, token);
+    const repoName = `${owner}/${repo}`;
+
+    const result = await Promise.race([
+      scorePullRequests(prs, repoUrl, repoName),
+      new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error("TIMEOUT")), 55_000),
+      ),
+    ]);
+
+    cache.set(cacheKey, result);
+
+    return NextResponse.json<ApiResponse<RepoAnalysis>>({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    return handleError(error);
+  }
+}
+
+function handleError(error: unknown): NextResponse<ApiResponse<never>> {
+  if (error instanceof RepoNotFoundError) {
+    return NextResponse.json(
+      { success: false, error: error.message, code: "REPO_NOT_FOUND" },
+      { status: 404 },
+    );
+  }
+
+  if (error instanceof RepoPrivateError) {
+    return NextResponse.json(
+      { success: false, error: error.message, code: "ACCESS_DENIED" },
+      { status: 403 },
+    );
+  }
+
+  if (error instanceof RateLimitError) {
+    return NextResponse.json(
+      { success: false, error: error.message, code: "RATE_LIMIT" },
+      { status: 403 },
+    );
+  }
+
+  if (error instanceof NoPullRequestsError) {
+    return NextResponse.json(
+      { success: false, error: error.message, code: "NO_MERGED_PRS" },
+      { status: 422 },
+    );
+  }
+
+  if (error instanceof GitHubApiError) {
+    return NextResponse.json(
+      { success: false, error: error.message, code: "GITHUB_API_ERROR" },
+      { status: error.status },
+    );
+  }
+
+  if (error instanceof Error && error.message === "TIMEOUT") {
+    return NextResponse.json(
+      { success: false, error: "Analysis timed out. Please try again.", code: "TIMEOUT" },
+      { status: 504 },
+    );
+  }
+
+  return NextResponse.json(
+    { success: false, error: "An unexpected error occurred", code: "INTERNAL_ERROR" },
+    { status: 500 },
+  );
+}
