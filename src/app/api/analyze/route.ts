@@ -108,6 +108,22 @@ function handleError(error: unknown): NextResponse<ApiResponse<never>> {
     );
   }
 
+  // Gemini API errors (e.g. rate limit, auth)
+  if (error instanceof Error && error.message.includes("[GoogleGenerativeAI Error]")) {
+    const isRateLimit = error.message.includes("429") || error.message.includes("quota");
+    if (isRateLimit) {
+      return NextResponse.json(
+        { success: false, error: "AI rate limit reached. Please try again in a minute.", code: "RATE_LIMIT" },
+        { status: 429 },
+      );
+    }
+    return NextResponse.json(
+      { success: false, error: "AI service error. Please try again.", code: "AI_ERROR" },
+      { status: 502 },
+    );
+  }
+
+  console.error("[analyze] Unhandled error:", error);
   return NextResponse.json(
     { success: false, error: "An unexpected error occurred", code: "INTERNAL_ERROR" },
     { status: 500 },
