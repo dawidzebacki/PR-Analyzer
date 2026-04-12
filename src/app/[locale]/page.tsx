@@ -1,17 +1,7 @@
 import dynamic from "next/dynamic";
 import { Hero } from "@/components/landing/Hero";
-
-const SocialProof = dynamic(() =>
-  import("@/components/landing/SocialProof").then((m) => ({
-    default: m.SocialProof,
-  })),
-);
-
-const HowItWorks = dynamic(() =>
-  import("@/components/landing/HowItWorks").then((m) => ({
-    default: m.HowItWorks,
-  })),
-);
+import { SocialProof } from "@/components/landing/SocialProof";
+import { HowItWorks } from "@/components/landing/HowItWorks";
 
 const ScoringDimensions = dynamic(() =>
   import("@/components/landing/ScoringDimensions").then((m) => ({
