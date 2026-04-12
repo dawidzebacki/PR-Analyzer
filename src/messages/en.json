@@ -109,6 +109,17 @@
     },
     "copyright": "© 2025 PR Analyzer. Built with AI."
   },
+  "errors": {
+    "INVALID_URL": "Please enter a valid GitHub repository URL.",
+    "REPO_NOT_FOUND": "Repository not found. Please check the URL and try again.",
+    "ACCESS_DENIED": "This repository is private. Only public repositories can be analyzed.",
+    "RATE_LIMIT": "GitHub API rate limit reached. Please try again later or use a GitHub token.",
+    "NO_MERGED_PRS": "No merged pull requests found in this repository.",
+    "GITHUB_API_ERROR": "Failed to fetch data from GitHub. Please try again.",
+    "TIMEOUT": "Analysis timed out. Please try again.",
+    "INTERNAL_ERROR": "An unexpected error occurred. Please try again.",
+    "NETWORK_ERROR": "Network error. Please check your connection and try again."
+  },
   "language": {
     "en": "English",
     "pl": "Polski"

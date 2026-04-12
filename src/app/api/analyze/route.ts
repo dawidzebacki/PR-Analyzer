@@ -12,8 +12,7 @@ import {
   RepoPrivateError,
 } from "@/lib/github";
 import { scorePullRequests } from "@/lib/scoring";
-import type { ApiResponse } from "@/types/api";
-import type { RepoAnalysis } from "@/types/scoring";
+import type { ApiResponse, AnalyzeResponse } from "@/types/api";
 
 export async function POST(request: Request) {
   try {
@@ -33,9 +32,10 @@ export async function POST(request: Request) {
     const cacheKey = cache.generateKey(repoUrl);
     const cached = cache.get(cacheKey);
     if (cached) {
-      return NextResponse.json<ApiResponse<RepoAnalysis>>({
+      return NextResponse.json<AnalyzeResponse>({
         success: true,
         data: cached,
+        id: cacheKey,
       });
     }
 
@@ -55,9 +55,10 @@ export async function POST(request: Request) {
 
     cache.set(cacheKey, result);
 
-    return NextResponse.json<ApiResponse<RepoAnalysis>>({
+    return NextResponse.json<AnalyzeResponse>({
       success: true,
       data: result,
+      id: cacheKey,
     });
   } catch (error) {
     return handleError(error);

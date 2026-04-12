@@ -4,9 +4,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod/v4";
 import { useTranslations } from "next-intl";
-import { useRouter } from "@/i18n/navigation";
 import { motion } from "framer-motion";
 import { repoUrlSchema } from "@/schemas";
+import { useAnalyze, AnalyzeError } from "@/hooks/useAnalyze";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 
@@ -32,7 +32,9 @@ const stagger = {
 
 export function CTASection() {
   const t = useTranslations("cta");
-  const router = useRouter();
+  const tCommon = useTranslations("common");
+  const tErrors = useTranslations("errors");
+  const { analyze, isLoading, error } = useAnalyze();
 
   const {
     register,
@@ -43,11 +45,7 @@ export function CTASection() {
   });
 
   function onSubmit(data: CTAFormData) {
-    const match = data.repoUrl.match(/github\.com\/([\w.-]+\/[\w.-]+)/);
-    if (match) {
-      const id = encodeURIComponent(match[1]);
-      router.push(`/results/${id}`);
-    }
+    analyze(data.repoUrl);
   }
 
   return (
@@ -74,24 +72,31 @@ export function CTASection() {
             {t("subtitle")}
           </motion.p>
 
-          <motion.form
-            variants={fadeInUp}
-            onSubmit={handleSubmit(onSubmit)}
-            className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:items-start sm:justify-center lg:max-w-lg"
-          >
-            <div className="relative flex-1 [&_p]:absolute [&_p]:left-0 [&_p]:top-full [&_p]:mt-1.5">
-              <Input
-                placeholder={t("inputPlaceholder")}
-                aria-label={t("inputPlaceholder")}
-                error={errors.repoUrl?.message}
-                className="h-[60px]"
-                {...register("repoUrl")}
-              />
-            </div>
-            <Button type="submit" variant="primary" size="lg">
-              {t("button")}
-            </Button>
-          </motion.form>
+          <motion.div variants={fadeInUp} className="mt-8 w-full sm:max-w-lg">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex w-full flex-col gap-3 sm:flex-row sm:items-start sm:justify-center"
+            >
+              <div className="relative flex-1 [&_p]:absolute [&_p]:left-0 [&_p]:top-full [&_p]:mt-1.5">
+                <Input
+                  placeholder={t("inputPlaceholder")}
+                  aria-label={t("inputPlaceholder")}
+                  error={errors.repoUrl?.message}
+                  className="h-[60px]"
+                  disabled={isLoading}
+                  {...register("repoUrl")}
+                />
+              </div>
+              <Button type="submit" variant="primary" size="lg" loading={isLoading}>
+                {isLoading ? tCommon("loading") : t("button")}
+              </Button>
+            </form>
+            {error instanceof AnalyzeError && (
+              <p className="mt-3 text-sm text-error">
+                {tErrors(error.code as Parameters<typeof tErrors>[0])}
+              </p>
+            )}
+          </motion.div>
         </motion.div>
       </div>
     </section>
