@@ -14,6 +14,7 @@ Landing page style based on passport-photo.online (indigo/purple CTA, PT Serif h
 - **Charts:** Recharts
 - **Storybook:** Storybook 10 (`@storybook/nextjs-vite`)
 - **Icons:** Lucide React
+- **i18n:** next-intl (prefix-based routing, en + pl)
 - **LLM:** Anthropic Claude API (claude-opus-4-6)
 - **Runtime/Package manager:** Bun
 - **Deploy:** Vercel
@@ -22,24 +23,35 @@ Landing page style based on passport-photo.online (indigo/purple CTA, PT Serif h
 ```
 src/
 ├── app/
-│   ├── api/
+│   ├── [locale]/           # Locale-prefixed pages (en, pl)
+│   │   ├── layout.tsx      # Root layout with NextIntlClientProvider
+│   │   ├── page.tsx        # Landing page
+│   │   └── results/[id]/
+│   │       └── page.tsx    # Dashboard page
+│   ├── api/                # API routes (outside [locale])
 │   │   ├── analyze/        # POST — start repo analysis
 │   │   └── results/[id]/   # GET — fetch results
-│   ├── results/[id]/       # Dashboard page
-│   ├── layout.tsx
-│   └── page.tsx            # Landing page
+│   └── globals.css
 ├── components/
 │   ├── ui/                 # Reusable UI primitives (Button, Input, Card, Badge, etc.)
 │   ├── landing/            # Landing page sections (Hero, HowItWorks, SocialProof, etc.)
 │   ├── dashboard/          # Dashboard components (ScoreCard, PRList, RadarChart, etc.)
 │   └── shared/             # Navbar, Footer, Container, LoadingState, ErrorState
 ├── hooks/                  # Custom React hooks (useAnalyze, useResults, etc.)
+├── i18n/
+│   ├── routing.ts          # Locale definitions (en, pl), defaultLocale
+│   ├── request.ts          # Server-side getRequestConfig
+│   └── navigation.ts       # Locale-aware Link, redirect, usePathname, useRouter
 ├── lib/                    # Business logic
 │   ├── github.ts           # GitHub API client
 │   ├── scoring.ts          # LLM scoring engine
 │   ├── cache.ts            # In-memory cache
 │   ├── prompts.ts          # LLM prompts
 │   └── utils.ts            # Helpers
+├── messages/
+│   ├── en.json             # English translations (source of truth)
+│   └── pl.json             # Polish translations
+├── middleware.ts            # next-intl locale detection middleware
 ├── types/                  # TypeScript interfaces
 │   ├── github.ts
 │   ├── scoring.ts
@@ -79,6 +91,24 @@ src/
 - Custom colors from design tokens, NEVER hardcoded hex values in JSX
 - Spacing: use Tailwind scale (p-4, gap-6, etc.), not arbitrary values
 - NEVER use `@apply` in CSS — only utility classes in JSX
+
+### i18n (next-intl)
+- NEVER hardcode user-facing strings — always use translation keys
+- Use `useTranslations('namespace')` in components (works in both server and client components)
+- Translation keys: nested by section, e.g. `hero.title`, `nav.howItWorks`
+- Keep `en.json` as source of truth, `pl.json` as translation
+- Use `Link` from `@/i18n/navigation` for locale-aware links (not `next/link`)
+- Add both EN and PL translations when adding new user-facing text
+- Font subsets include `latin-ext` for Polish characters
+- In async server components, use `getTranslations` from `next-intl/server` (not `useTranslations`)
+
+### Storybook
+- Stories colocated with components as `ComponentName.stories.ts`
+- Every UI primitive (`src/components/ui/*`) MUST have stories
+- Landing/dashboard sections: stories encouraged
+- Use Component Story Format (CSF3) with `satisfies Meta<typeof Component>`
+- Import from `@storybook/nextjs-vite` (not `@storybook/react`)
+- Cover: default state, all variants, interactive states (loading, disabled, error)
 
 ### Error Handling
 - API routes: always try/catch, return proper HTTP status + JSON error
