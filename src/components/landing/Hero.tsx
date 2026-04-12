@@ -324,7 +324,7 @@ export function Hero() {
   return (
     <section className="pb-16 pt-12 lg:pb-24 lg:pt-20">
       <div className="mx-auto max-w-[1110px] px-[18px]">
-        <div className="flex flex-col items-center gap-12 lg:flex-row lg:items-center lg:gap-16">
+        <div className="flex flex-col items-center gap-12 lg:flex-row lg:items-start lg:gap-16">
           {/* Left column — text + form */}
           <motion.div
             variants={stagger}
