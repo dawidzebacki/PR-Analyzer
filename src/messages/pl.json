@@ -51,6 +51,22 @@
       "description": "Przeglądaj szczegółowe oceny, wykresy i praktyczne wskazówki na interaktywnym dashboardzie."
     }
   },
+  "scoring": {
+    "title": "Co mierzymy",
+    "subtitle": "Każdy pull request jest oceniany w trzech kluczowych wymiarach, aby dać Ci pełny obraz.",
+    "impact": {
+      "title": "Wpływ",
+      "description": "Czy PR dostarcza realną wartość? Mierzymy znaczące zmiany w porównaniu do trywialnych poprawek i szablonowego kodu."
+    },
+    "aiLeverage": {
+      "title": "Wykorzystanie AI",
+      "description": "Czy widać ślady rozwoju wspieranego przez AI? Wyższe oceny nagradzają umiejętne korzystanie z narzędzi AI."
+    },
+    "quality": {
+      "title": "Jakość",
+      "description": "Doskonałość inżynieryjna: precyzyjny zakres, czysty kod, pokrycie testami i czytelne opisy PR-ów."
+    }
+  },
   "results": {
     "heading": "Wyniki dla {id}"
   },

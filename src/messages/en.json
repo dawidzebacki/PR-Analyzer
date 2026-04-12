@@ -51,6 +51,22 @@
       "description": "View detailed scores, charts, and actionable insights in an interactive dashboard."
     }
   },
+  "scoring": {
+    "title": "What We Measure",
+    "subtitle": "Every pull request is scored across three key dimensions to give you a complete picture.",
+    "impact": {
+      "title": "Impact",
+      "description": "Does the PR deliver real value? We measure meaningful changes versus trivial fixes and boilerplate."
+    },
+    "aiLeverage": {
+      "title": "AI Leverage",
+      "description": "Is there evidence of AI-assisted development? Higher scores reward skillful use of AI tools."
+    },
+    "quality": {
+      "title": "Quality",
+      "description": "Engineering excellence: focused scope, clean code, test coverage, and clear PR descriptions."
+    }
+  },
   "results": {
     "heading": "Results for {id}"
   },
