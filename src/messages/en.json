@@ -72,6 +72,12 @@
       "description": "Engineering excellence: focused scope, clean code, test coverage, and clear PR descriptions."
     }
   },
+  "cta": {
+    "title": "Ready to Analyze Your PRs?",
+    "subtitle": "Paste any public GitHub repository URL and get AI-powered insights in seconds.",
+    "inputPlaceholder": "https://github.com/owner/repo",
+    "button": "Analyze Repository"
+  },
   "preview": {
     "title": "See Your Dashboard in Action",
     "subtitle": "A preview of the interactive report you'll get — scores, breakdowns, and PR-level insights at a glance.",

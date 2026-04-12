@@ -70,6 +70,7 @@ export function Navbar() {
           <Link
             href={pathname}
             locale={otherLocale}
+            onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
             className="flex items-center gap-1.5 text-sm font-medium text-text-secondary transition-colors duration-300 hover:text-primary"
           >
             <Globe className="h-4 w-4" />
@@ -83,7 +84,11 @@ export function Navbar() {
             transition={{ duration: 0.3 }}
             className={isScrolled ? "" : "pointer-events-none"}
           >
-            <Button variant="primary" size="sm">
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
+            >
               {t("cta")}
             </Button>
           </motion.div>
@@ -130,13 +135,24 @@ export function Navbar() {
                 href={pathname}
                 locale={otherLocale}
                 className="flex items-center gap-1.5 text-base font-medium text-text-secondary transition-colors duration-300 hover:text-primary"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  window.scrollTo({ top: 0, behavior: "instant" });
+                }}
               >
                 <Globe className="h-4 w-4" />
                 {tLang(otherLocale)}
               </Link>
 
-              <Button variant="primary" size="lg" className="mt-2 w-full">
+              <Button
+                variant="primary"
+                size="lg"
+                className="mt-2 w-full"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  window.scrollTo({ top: 0, behavior: "instant" });
+                }}
+              >
                 {t("cta")}
               </Button>
             </div>

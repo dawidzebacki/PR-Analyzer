@@ -109,7 +109,7 @@ export function ScoringDimensions() {
   const inView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section ref={ref} className="bg-surface py-20 lg:py-28">
+    <section id="scoring" ref={ref} className="bg-surface py-20 lg:py-28">
       <div className="mx-auto max-w-[1110px] px-[18px]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

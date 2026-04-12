@@ -23,9 +23,9 @@ const ptSerif = PT_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "PR Analyzer — Score Your Pull Requests",
+  title: "PR Analyzer — AI-Powered GitHub Pull Request Reviews",
   description:
-    "Analyze GitHub pull requests for Impact, AI-Leverage, and Quality. Get actionable scores and insights for your team.",
+    "Analyze GitHub pull requests for Impact, AI-Leverage, and Quality. Get instant AI-powered scores, charts, and actionable insights for your team.",
 };
 
 interface LocaleLayoutProps {
