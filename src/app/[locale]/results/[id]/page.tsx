@@ -6,6 +6,7 @@ import { AnalysisLoading } from "@/components/dashboard/AnalysisLoading";
 import { RepoHeader } from "@/components/dashboard/RepoHeader";
 import { TotalScore } from "@/components/dashboard/TotalScore";
 import { ScoreBreakdown } from "@/components/dashboard/ScoreBreakdown";
+import { PRList } from "@/components/dashboard/PRList";
 import { Container } from "@/components/ui/Container";
 
 interface ResultsPageProps {
@@ -43,6 +44,8 @@ export default function ResultsPage({ params }: ResultsPageProps) {
         <TotalScore score={data.totalScore} />
 
         <ScoreBreakdown scores={data.scores} />
+
+        <PRList prs={data.prs} repoUrl={data.repoUrl} />
       </div>
     </Container>
   );
