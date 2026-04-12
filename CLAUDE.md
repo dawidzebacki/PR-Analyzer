@@ -36,7 +36,7 @@ src/
 │   ├── ui/                 # Reusable UI primitives (Button, Input, Card, Badge, etc.)
 │   ├── landing/            # Landing page sections (Hero, HowItWorks, SocialProof, etc.)
 │   ├── dashboard/          # Dashboard components (ScoreCard, PRList, RadarChart, etc.)
-│   └── shared/             # Navbar, Footer, Container, LoadingState, ErrorState
+│   └── shared/             # Navbar, Footer, LocaleSwitcher, Container, LoadingState, ErrorState
 ├── hooks/                  # Custom React hooks (useAnalyze, useResults, etc.)
 ├── i18n/
 │   ├── routing.ts          # Locale definitions (en, pl), defaultLocale
@@ -142,7 +142,7 @@ background:     #EFF6FA   (hsla(197,54%,97%) — page background, light blue tin
 surface:        #FFFFFF   (white — cards, navbar, footer, secondary sections)
 border:         #E8ECFC   (hsla(228,93%,95%) — light blue borders, separators)
 text:           #1D253B   (same as navy — main body text)
-text-muted:     #8C8FA3   (hsla(229,18%,64%) — secondary text, descriptions)
+text-muted:     #6B6F85   (hsla(229,11%,47%) — secondary text, descriptions — WCAG AA compliant)
 text-secondary: #5C6370   (hsla(225,9%,43%) — inactive tabs, less prominent text)
 error:          #E04E6A   (hsla(353,81%,63%) — error states)
 error-bg:       #FDE8E8   (hsla(2,100%,95%) — error background)

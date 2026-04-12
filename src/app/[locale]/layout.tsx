@@ -12,14 +12,14 @@ import "../globals.css";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin", "latin-ext"],
-  display: "block",
+  display: "swap",
 });
 
 const ptSerif = PT_Serif({
   variable: "--font-pt-serif",
   subsets: ["latin", "latin-ext"],
   weight: "700",
-  display: "block",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
