@@ -23,6 +23,18 @@
     "cta": "Analyze Repository",
     "trust": "Free • No login required • Public repos only"
   },
+  "socialProof": {
+    "label": "Trusted by developers at",
+    "stat": "{count}+ repositories analyzed",
+    "companies": {
+      "vercel": "Vercel",
+      "stripe": "Stripe",
+      "shopify": "Shopify",
+      "notion": "Notion",
+      "linear": "Linear",
+      "supabase": "Supabase"
+    }
+  },
   "results": {
     "heading": "Results for {id}"
   },
