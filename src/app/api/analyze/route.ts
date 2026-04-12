@@ -12,8 +12,7 @@ import {
   RepoPrivateError,
 } from "@/lib/github";
 import { scorePullRequests } from "@/lib/scoring";
-import type { ApiResponse } from "@/types/api";
-import type { RepoAnalysis } from "@/types/scoring";
+import type { ApiResponse, AnalyzeResponse } from "@/types/api";
 
 export async function POST(request: Request) {
   try {
@@ -33,9 +32,10 @@ export async function POST(request: Request) {
     const cacheKey = cache.generateKey(repoUrl);
     const cached = cache.get(cacheKey);
     if (cached) {
-      return NextResponse.json<ApiResponse<RepoAnalysis>>({
+      return NextResponse.json<AnalyzeResponse>({
         success: true,
         data: cached,
+        id: cacheKey,
       });
     }
 
@@ -55,9 +55,10 @@ export async function POST(request: Request) {
 
     cache.set(cacheKey, result);
 
-    return NextResponse.json<ApiResponse<RepoAnalysis>>({
+    return NextResponse.json<AnalyzeResponse>({
       success: true,
       data: result,
+      id: cacheKey,
     });
   } catch (error) {
     return handleError(error);
@@ -107,6 +108,22 @@ function handleError(error: unknown): NextResponse<ApiResponse<never>> {
     );
   }
 
+  // Gemini API errors (e.g. rate limit, auth)
+  if (error instanceof Error && error.message.includes("[GoogleGenerativeAI Error]")) {
+    const isRateLimit = error.message.includes("429") || error.message.includes("quota");
+    if (isRateLimit) {
+      return NextResponse.json(
+        { success: false, error: "AI rate limit reached. Please try again in a minute.", code: "RATE_LIMIT" },
+        { status: 429 },
+      );
+    }
+    return NextResponse.json(
+      { success: false, error: "AI service error. Please try again.", code: "AI_ERROR" },
+      { status: 502 },
+    );
+  }
+
+  console.error("[analyze] Unhandled error:", error);
   return NextResponse.json(
     { success: false, error: "An unexpected error occurred", code: "INTERNAL_ERROR" },
     { status: 500 },

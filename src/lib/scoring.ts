@@ -1,4 +1,4 @@
-import Anthropic from "@anthropic-ai/sdk";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { z } from "zod/v4";
 
 import { SCORING_WEIGHTS, ANALYSIS_TIMEOUT_MS } from "@/constants";
@@ -11,9 +11,17 @@ import type {
 } from "@/types/scoring";
 import { SCORING_SYSTEM_PROMPT, buildUserPrompt } from "./prompts";
 
-// --- Anthropic client ---
+// --- Gemini client ---
 
-const anthropic = new Anthropic();
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+
+const model = genAI.getGenerativeModel({
+  model: "gemini-2.0-flash",
+  systemInstruction: SCORING_SYSTEM_PROMPT,
+  generationConfig: {
+    responseMimeType: "application/json",
+  },
+});
 
 // --- Validation ---
 
@@ -42,17 +50,8 @@ function calculateTotal(impact: number, aiLeverage: number, quality: number): nu
 async function callLLM(prs: ParsedPR[]): Promise<LLMScoringResponse[]> {
   const userPrompt = buildUserPrompt(prs);
 
-  const response = await anthropic.messages.create({
-    model: "claude-sonnet-4-20250514",
-    max_tokens: 4096,
-    system: SCORING_SYSTEM_PROMPT,
-    messages: [{ role: "user", content: userPrompt }],
-  });
-
-  const text = response.content
-    .filter((block): block is Anthropic.TextBlock => block.type === "text")
-    .map((block) => block.text)
-    .join("");
+  const result = await model.generateContent(userPrompt);
+  const text = result.response.text();
 
   return parseLLMResponse(text);
 }

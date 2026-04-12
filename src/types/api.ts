@@ -9,4 +9,6 @@ export type ApiResponse<T> =
 
 export type AnalyzeRequest = z.infer<typeof analyzeRequestSchema>;
 
-export type AnalyzeResponse = ApiResponse<RepoAnalysis>;
+export type AnalyzeResponse =
+  | { success: true; data: RepoAnalysis; id: string }
+  | { success: false; error: string; code?: string };
