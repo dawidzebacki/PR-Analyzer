@@ -39,6 +39,7 @@ export interface ParsedPR {
   title: string;
   author: string;
   description: string;
+  mergedAt: string;
   filesChanged: number;
   additions: number;
   deletions: number;
