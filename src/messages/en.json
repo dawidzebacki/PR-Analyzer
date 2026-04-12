@@ -21,7 +21,12 @@
     "subtitle": "Get instant AI-powered insights on code quality, impact, and AI usage across your pull requests.",
     "inputPlaceholder": "https://github.com/owner/repo",
     "cta": "Analyze Repository",
-    "trust": "Free • No login required • Public repos only"
+    "trust": "Free • No login required • Public repos only",
+    "illustration": {
+      "score": "Score",
+      "prsAnalyzed": "PRs Analyzed",
+      "qualityBadge": "Quality A"
+    }
   },
   "socialProof": {
     "label": "Trusted by developers at",
@@ -66,6 +71,12 @@
       "title": "Quality",
       "description": "Engineering excellence: focused scope, clean code, test coverage, and clear PR descriptions."
     }
+  },
+  "preview": {
+    "title": "See Your Dashboard in Action",
+    "subtitle": "A preview of the interactive report you'll get — scores, breakdowns, and PR-level insights at a glance.",
+    "overallScore": "Overall Score",
+    "recentPRs": "Recent Pull Requests"
   },
   "results": {
     "heading": "Results for {id}"

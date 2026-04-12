@@ -21,7 +21,12 @@
     "subtitle": "Uzyskaj natychmiastowe, wspierane przez AI informacje o jakości kodu, wpływie zmian i wykorzystaniu AI w Twoich pull requestach.",
     "inputPlaceholder": "https://github.com/właściciel/repo",
     "cta": "Analizuj repozytorium",
-    "trust": "Darmowe • Bez logowania • Tylko publiczne repozytoria"
+    "trust": "Darmowe • Bez logowania • Tylko publiczne repozytoria",
+    "illustration": {
+      "score": "Wynik",
+      "prsAnalyzed": "Zbadane PR-y",
+      "qualityBadge": "Jakość A"
+    }
   },
   "socialProof": {
     "label": "Zaufali nam deweloperzy z",
@@ -66,6 +71,12 @@
       "title": "Jakość",
       "description": "Doskonałość inżynieryjna: precyzyjny zakres, czysty kod, pokrycie testami i czytelne opisy PR-ów."
     }
+  },
+  "preview": {
+    "title": "Zobacz swój dashboard w akcji",
+    "subtitle": "Podgląd interaktywnego raportu, który otrzymasz — oceny, rozkład wymiarów i szczegóły na poziomie PR-ów.",
+    "overallScore": "Ocena ogólna",
+    "recentPRs": "Ostatnie Pull Requesty"
   },
   "results": {
     "heading": "Wyniki dla {id}"
