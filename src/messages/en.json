@@ -84,6 +84,19 @@
     "overallScore": "Overall Score",
     "recentPRs": "Recent Pull Requests"
   },
+  "loading": {
+    "step1": "Fetching pull requests from GitHub",
+    "step2": "Reading code changes and diffs",
+    "step3": "AI is analyzing each PR",
+    "step4": "Calculating scores and metrics",
+    "step5": "Generating your report",
+    "progress": "This usually takes 30–60 seconds",
+    "funFact1": "The average PR has 50 lines changed",
+    "funFact2": "Top teams review PRs within 4 hours",
+    "funFact3": "Small PRs get merged 40% faster",
+    "funFact4": "AI-assisted PRs have 15% fewer bugs",
+    "funFact5": "Code review catches 60% of defects"
+  },
   "results": {
     "heading": "Results for {id}"
   },

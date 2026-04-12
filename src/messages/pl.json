@@ -84,6 +84,19 @@
     "overallScore": "Ocena ogólna",
     "recentPRs": "Ostatnie Pull Requesty"
   },
+  "loading": {
+    "step1": "Pobieranie pull requestów z GitHuba",
+    "step2": "Odczytywanie zmian w kodzie i diffów",
+    "step3": "AI analizuje każdy PR",
+    "step4": "Obliczanie wyników i metryk",
+    "step5": "Generowanie raportu",
+    "progress": "To zwykle zajmuje 30–60 sekund",
+    "funFact1": "Przeciętny PR ma 50 zmienionych linii",
+    "funFact2": "Najlepsze zespoły przeglądają PR-y w 4 godziny",
+    "funFact3": "Małe PR-y są mergowane 40% szybciej",
+    "funFact4": "PR-y wspomagane przez AI mają 15% mniej błędów",
+    "funFact5": "Code review wykrywa 60% defektów"
+  },
   "results": {
     "heading": "Wyniki dla {id}"
   },
