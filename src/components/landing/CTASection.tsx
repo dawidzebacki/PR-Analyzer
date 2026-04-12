@@ -82,6 +82,7 @@ export function CTASection() {
             <div className="relative flex-1 [&_p]:absolute [&_p]:left-0 [&_p]:top-full [&_p]:mt-1.5">
               <Input
                 placeholder={t("inputPlaceholder")}
+                aria-label={t("inputPlaceholder")}
                 error={errors.repoUrl?.message}
                 className="h-[60px]"
                 {...register("repoUrl")}

@@ -365,6 +365,7 @@ export function Hero() {
               <div className="flex-1">
                 <Input
                   placeholder={t("inputPlaceholder")}
+                  aria-label={t("inputPlaceholder")}
                   error={errors.repoUrl?.message}
                   className="h-[60px]"
                   {...register("repoUrl")}
@@ -388,7 +389,7 @@ export function Hero() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
-            className="flex w-full max-w-[555px] items-center justify-center lg:flex-1"
+            className="flex w-full max-w-[555px] items-center justify-center lg:flex-1 aspect-[480/420]"
           >
             <HeroIllustration
               scoreLabel={t("illustration.score")}

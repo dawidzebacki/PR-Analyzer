@@ -12,6 +12,7 @@ Will be distilled into README sections (Design Decisions, AI Usage, What I'd Do 
 - Missing --color-black in globals.css — added per design system spec
 - Tailwind v4 uses CSS-based @theme config, no tailwind.config.ts needed — all design tokens live in globals.css
 - Added .gitattributes with eol=lf to fix CRLF warnings on Windows (core.autocrlf=true globally)
+- PR#15: Darkened text-muted from #8C8FA3 to #6B6F85 — original passport-photo.online color failed WCAG AA (2.94:1 on bg-background)
 
 ## Issues & Fixes
 

@@ -1,21 +1,15 @@
-"use client";
-
-import { GitBranch, Globe } from "lucide-react";
-import { useTranslations, useLocale } from "next-intl";
-import { Link, usePathname } from "@/i18n/navigation";
+import { GitBranch } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
+import { LocaleSwitcher } from "./LocaleSwitcher";
 
 const PRODUCT_LINKS = ["analyzer", "scoring", "api"] as const;
 const RESOURCE_LINKS = ["docs", "blog", "changelog"] as const;
 const LEGAL_LINKS = ["github", "privacy", "terms"] as const;
 
-export function Footer() {
-  const t = useTranslations("footer");
-  const tCommon = useTranslations("common");
-  const tLang = useTranslations("language");
-  const locale = useLocale();
-  const pathname = usePathname();
-
-  const otherLocale = locale === "en" ? "pl" : "en";
+export async function Footer() {
+  const t = await getTranslations("footer");
+  const tCommon = await getTranslations("common");
 
   return (
     <footer className="border-t border-border bg-surface">
@@ -96,14 +90,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
           <p className="text-sm text-text-muted">{t("copyright")}</p>
-          <Link
-            href={pathname}
-            locale={otherLocale}
-            className="flex items-center gap-1.5 text-sm font-medium text-text-secondary transition-colors duration-300 hover:text-primary"
-          >
-            <Globe className="h-4 w-4" />
-            {tLang(otherLocale)}
-          </Link>
+          <LocaleSwitcher className="flex items-center gap-1.5 text-sm font-medium text-text-secondary transition-colors duration-300 hover:text-primary" />
         </div>
       </div>
     </footer>

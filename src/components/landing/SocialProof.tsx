@@ -49,6 +49,7 @@ export function SocialProof() {
           <motion.div
             variants={stagger}
             className="grid w-full grid-cols-3 gap-y-6 lg:grid-cols-6"
+            aria-hidden="true"
           >
             {COMPANIES.map((company) => (
               <motion.span
