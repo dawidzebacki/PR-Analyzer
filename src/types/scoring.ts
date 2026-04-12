@@ -16,6 +16,7 @@ export type RepoAnalysis = z.infer<typeof repoAnalysisSchema>;
 export type AuthorStats = z.infer<typeof authorStatSchema>;
 
 export interface LLMScoringResponse {
+  number: number;
   impact: number;
   aiLeverage: number;
   quality: number;

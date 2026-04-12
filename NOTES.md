@@ -17,6 +17,7 @@ Will be distilled into README sections (Design Decisions, AI Usage, What I'd Do 
 ## Issues & Fixes
 
 <!-- Things that broke, what you tried, what worked -->
+- PR#17: LLMScoringResponse type was missing `number` field — tsc caught it, added to types/scoring.ts
 
 ## AI Observations
 
