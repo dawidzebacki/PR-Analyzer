@@ -1,4 +1,3 @@
-import React from 'react'
 import type { Preview } from '@storybook/nextjs-vite'
 import { NextIntlClientProvider } from 'next-intl'
 import messages from '../src/messages/en.json'
@@ -15,8 +14,41 @@ const preview: Preview = {
   parameters: {
     controls: {
       matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
+        color: /(background|color)$/i,
+        date: /Date$/i,
+      },
+    },
+
+    viewport: {
+      viewports: {
+        mobile: {
+          name: 'Mobile',
+          styles: { width: '375px', height: '812px' },
+        },
+        tablet: {
+          name: 'Tablet',
+          styles: { width: '768px', height: '1024px' },
+        },
+        desktop: {
+          name: 'Desktop',
+          styles: { width: '1280px', height: '900px' },
+        },
+      },
+    },
+
+    backgrounds: {
+      default: 'App Background',
+      values: [
+        { name: 'App Background', value: '#EFF6FA' },
+        { name: 'Surface', value: '#FFFFFF' },
+        { name: 'Navy', value: '#1D253B' },
+      ],
+    },
+
+    nextjs: {
+      appDirectory: true,
+      navigation: {
+        pathname: '/en',
       },
     },
 
@@ -24,8 +56,8 @@ const preview: Preview = {
       // 'todo' - show a11y violations in the test UI only
       // 'error' - fail CI on a11y violations
       // 'off' - skip a11y checks entirely
-      test: 'todo'
-    }
+      test: 'todo',
+    },
   },
 };
 

@@ -1,0 +1,229 @@
+import { Meta, ColorPalette, ColorItem, Typeset } from '@storybook/addon-docs/blocks';
+
+<Meta title="Design System/Overview" />
+
+# PR Analyzer Design System
+
+Design tokens and visual language based on passport-photo.online.
+Fonts: **PT Serif** (headings) + **Inter** (body/UI).
+
+---
+
+## Color Palette
+
+### Brand
+
+<ColorPalette>
+  <ColorItem title="Primary" subtitle="#4E43E1 — CTA buttons, links" colors={['#4E43E1']} />
+  <ColorItem title="Primary Hover" subtitle="#3B2FA0 — Button hover" colors={['#3B2FA0']} />
+  <ColorItem title="Navy" subtitle="#1D253B — Headings, navbar, footer text" colors={['#1D253B']} />
+  <ColorItem title="Black" subtitle="#000000 — Some headings" colors={['#000000']} />
+</ColorPalette>
+
+### Accents
+
+<ColorPalette>
+  <ColorItem title="Accent Green" subtitle="#35BA80 — Success, Trustpilot" colors={['#35BA80']} />
+  <ColorItem title="Accent Blue" subtitle="#0070F3 — Links" colors={['#0070F3']} />
+</ColorPalette>
+
+### Backgrounds & Surfaces
+
+<ColorPalette>
+  <ColorItem title="Background" subtitle="#EFF6FA — Page background, light blue tint" colors={['#EFF6FA']} />
+  <ColorItem title="Surface" subtitle="#FFFFFF — Cards, navbar, footer" colors={['#FFFFFF']} />
+  <ColorItem title="Border" subtitle="#E8ECFC — Separators, input borders" colors={['#E8ECFC']} />
+</ColorPalette>
+
+### Text
+
+<ColorPalette>
+  <ColorItem title="Text" subtitle="#1D253B — Primary body text" colors={['#1D253B']} />
+  <ColorItem title="Text Muted" subtitle="#8C8FA3 — Secondary descriptions" colors={['#8C8FA3']} />
+  <ColorItem title="Text Secondary" subtitle="#5C6370 — Inactive tabs, less prominent" colors={['#5C6370']} />
+</ColorPalette>
+
+### Score Colors
+
+<ColorPalette>
+  <ColorItem title="Score Red" subtitle="#E04E6A — Low scores (0-39)" colors={['#E04E6A']} />
+  <ColorItem title="Score Yellow" subtitle="#F5A623 — Medium scores (40-69)" colors={['#F5A623']} />
+  <ColorItem title="Score Green" subtitle="#35BA80 — High scores (70-100)" colors={['#35BA80']} />
+</ColorPalette>
+
+### Error States
+
+<ColorPalette>
+  <ColorItem title="Error" subtitle="#E04E6A — Error text and borders" colors={['#E04E6A']} />
+  <ColorItem title="Error Background" subtitle="#FDE8E8 — Error containers" colors={['#FDE8E8']} />
+</ColorPalette>
+
+### Button Disabled
+
+<ColorPalette>
+  <ColorItem title="Disabled BG" subtitle="#D8DBE5 — Disabled button background" colors={['#D8DBE5']} />
+  <ColorItem title="Disabled Text" subtitle="#7B8494 — Disabled button text" colors={['#7B8494']} />
+</ColorPalette>
+
+---
+
+## Typography
+
+### Headings — PT Serif Bold (700)
+
+<Typeset
+  fontFamily='"PT Serif", serif'
+  fontWeight={700}
+  fontSizes={['2.5rem', '2rem', '1.5rem']}
+  sampleText="Analyze your PRs"
+/>
+
+<table>
+  <thead>
+    <tr>
+      <th>Level</th>
+      <th>Desktop</th>
+      <th>Mobile</th>
+      <th>Letter Spacing</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>H1</td><td>72px / 80px</td><td>40px / 46px</td><td>-0.15rem</td></tr>
+    <tr><td>H2</td><td>48px / 54px</td><td>32px / 38px</td><td>-0.1125rem</td></tr>
+    <tr><td>H3</td><td>40px / 46px</td><td>24px / 30px</td><td>-0.08rem</td></tr>
+  </tbody>
+</table>
+
+### Body — Inter (variable 100-900)
+
+<Typeset
+  fontFamily='"Inter", sans-serif'
+  fontWeight={400}
+  fontSizes={['1.125rem', '1rem', '0.875rem']}
+  sampleText="Score your pull requests on Impact, AI-Leverage, and Quality."
+/>
+
+<table>
+  <thead>
+    <tr>
+      <th>Style</th>
+      <th>Size</th>
+      <th>Line Height</th>
+      <th>Weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Body Large</td><td>18px</td><td>28px</td><td>400</td></tr>
+    <tr><td>Body</td><td>16px</td><td>24px</td><td>400</td></tr>
+    <tr><td>Small</td><td>14px</td><td>20px</td><td>400</td></tr>
+    <tr><td>Subtitle</td><td>24px / 18px mobile</td><td>30px / 28px</td><td>500</td></tr>
+    <tr><td>Nav Item</td><td>16px / 18px mobile</td><td>22px</td><td>600</td></tr>
+  </tbody>
+</table>
+
+---
+
+## Border Radius
+
+<table>
+  <thead>
+    <tr>
+      <th>Token</th>
+      <th>Value</th>
+      <th>Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><code>rounded-sm</code></td><td>4px</td><td>Checkboxes, small elements</td></tr>
+    <tr><td><code>rounded-md</code></td><td>6px</td><td>Inputs, small cards</td></tr>
+    <tr><td><code>rounded-lg</code></td><td>8px</td><td>Buttons, main cards</td></tr>
+    <tr><td><code>rounded-xl</code></td><td>12px</td><td>Larger cards, containers</td></tr>
+    <tr><td><code>rounded-2xl</code></td><td>16px</td><td>Document list</td></tr>
+    <tr><td><code>rounded-full</code></td><td>36px</td><td>Pills, badges</td></tr>
+  </tbody>
+</table>
+
+---
+
+## Layout
+
+<table>
+  <thead>
+    <tr>
+      <th>Token</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Container max-width</td><td>1110px</td></tr>
+    <tr><td>Navbar max-width</td><td>1440px</td></tr>
+    <tr><td>Horizontal padding</td><td>18px (base), 32px (navbar desktop)</td></tr>
+    <tr><td>Section spacing</td><td>80-120px vertical</td></tr>
+    <tr><td>Navbar height</td><td>100px (desktop), 66px (mobile)</td></tr>
+  </tbody>
+</table>
+
+---
+
+## Animations
+
+All animations use Framer Motion with `easeOut` easing.
+
+<table>
+  <thead>
+    <tr>
+      <th>Animation</th>
+      <th>Properties</th>
+      <th>Duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Fade In Up</td><td>opacity 0 → 1, y 20 → 0</td><td>0.5s</td></tr>
+    <tr><td>Slide In Left</td><td>opacity 0 → 1, x -20 → 0</td><td>0.5s</td></tr>
+    <tr><td>Slide In Right</td><td>opacity 0 → 1, x 20 → 0</td><td>0.5s</td></tr>
+    <tr><td>Stagger Children</td><td>staggerChildren: 0.1</td><td>—</td></tr>
+    <tr><td>Micro-interactions</td><td>—</td><td>0.3s</td></tr>
+  </tbody>
+</table>
+
+---
+
+## Component Inventory
+
+### UI Primitives (`src/components/ui/`)
+
+<table>
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Stories</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Button</strong></td><td>Primary, Secondary, Ghost, Sizes, Loading, Disabled</td><td>Main CTA and action button</td></tr>
+    <tr><td><strong>Input</strong></td><td>Default, With Label, With Error, Disabled</td><td>Form text input</td></tr>
+    <tr><td><strong>Badge</strong></td><td>Success, Warning, Error, Neutral, Sizes</td><td>Status indicators</td></tr>
+    <tr><td><strong>Card</strong></td><td>Default, With Hover</td><td>Content container</td></tr>
+    <tr><td><strong>Container</strong></td><td>Default</td><td>1110px max-width page wrapper</td></tr>
+    <tr><td><strong>ScoreRing</strong></td><td>Sizes, Score Range, Animated, Labels</td><td>Circular score indicator (0-100)</td></tr>
+    <tr><td><strong>Section</strong></td><td>Primary BG, Secondary BG</td><td>Page section with alternating backgrounds</td></tr>
+  </tbody>
+</table>
+
+### Shared Components (`src/components/shared/`)
+
+<table>
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Stories</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Navbar</strong></td><td>Default, Scrolled</td><td>Sticky nav with logo, links, CTA</td></tr>
+    <tr><td><strong>Footer</strong></td><td>Default</td><td>Site footer with link columns</td></tr>
+    <tr><td><strong>Providers</strong></td><td>—</td><td>React context wrapper (no visual output)</td></tr>
+  </tbody>
+</table>
