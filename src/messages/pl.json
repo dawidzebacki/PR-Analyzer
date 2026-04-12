@@ -11,7 +11,10 @@
   "nav": {
     "howItWorks": "Jak to działa",
     "scoring": "Ocenianie",
-    "github": "GitHub"
+    "github": "GitHub",
+    "cta": "Rozpocznij",
+    "openMenu": "Otwórz menu",
+    "closeMenu": "Zamknij menu"
   },
   "hero": {
     "title": "Analizuj Pull Requesty z pomocą AI",
@@ -25,8 +28,28 @@
   },
   "footer": {
     "description": "Narzędzie do analizy pull requestów na GitHubie wspierane przez AI.",
-    "resources": "Zasoby",
     "product": "Produkt",
+    "productLinks": {
+      "analyzer": "Analizator PR",
+      "scoring": "Model oceniania",
+      "api": "API"
+    },
+    "resources": "Zasoby",
+    "resourceLinks": {
+      "docs": "Dokumentacja",
+      "blog": "Blog",
+      "changelog": "Historia zmian"
+    },
+    "links": "Linki",
+    "legalLinks": {
+      "github": "GitHub",
+      "privacy": "Polityka prywatności",
+      "terms": "Regulamin"
+    },
     "copyright": "© 2025 PR Analyzer. Zbudowane z AI."
+  },
+  "language": {
+    "en": "English",
+    "pl": "Polski"
   }
 }
