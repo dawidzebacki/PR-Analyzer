@@ -35,6 +35,22 @@
       "supabase": "Supabase"
     }
   },
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "Three simple steps to get AI-powered insights on your pull requests.",
+    "step1": {
+      "title": "Paste Your Repo URL",
+      "description": "Enter any public GitHub repository URL and we'll fetch the latest merged pull requests."
+    },
+    "step2": {
+      "title": "AI Analyzes PRs",
+      "description": "Our AI engine scores each PR on impact, AI-leverage, and code quality using Claude."
+    },
+    "step3": {
+      "title": "Get Your Report",
+      "description": "View detailed scores, charts, and actionable insights in an interactive dashboard."
+    }
+  },
   "results": {
     "heading": "Results for {id}"
   },

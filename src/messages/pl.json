@@ -35,6 +35,22 @@
       "supabase": "Supabase"
     }
   },
+  "howItWorks": {
+    "title": "Jak to działa",
+    "subtitle": "Trzy proste kroki, by uzyskać analizę Twoich pull requestów wspieraną przez AI.",
+    "step1": {
+      "title": "Wklej URL repozytorium",
+      "description": "Podaj URL dowolnego publicznego repozytorium GitHub, a my pobierzemy najnowsze zmergowane pull requesty."
+    },
+    "step2": {
+      "title": "AI analizuje PR-y",
+      "description": "Nasz silnik AI ocenia każdy PR pod kątem wpływu, wykorzystania AI i jakości kodu za pomocą Claude."
+    },
+    "step3": {
+      "title": "Otrzymaj raport",
+      "description": "Przeglądaj szczegółowe oceny, wykresy i praktyczne wskazówki na interaktywnym dashboardzie."
+    }
+  },
   "results": {
     "heading": "Wyniki dla {id}"
   },
