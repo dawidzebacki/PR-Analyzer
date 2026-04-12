@@ -49,7 +49,12 @@ const BARS = [
 
 const BAR_BOTTOM = 265;
 
-function AnimatedScore({ inView }: { inView: boolean }) {
+interface AnimatedScoreProps {
+  inView: boolean;
+  scoreLabel: string;
+}
+
+function AnimatedScore({ inView, scoreLabel }: AnimatedScoreProps) {
   const scoreValue = useMotionValue(0);
   const [displayScore, setDisplayScore] = useState(0);
 
@@ -117,13 +122,19 @@ function AnimatedScore({ inView }: { inView: boolean }) {
         fontSize="12"
         fill="#8C8FA3"
       >
-        Score
+        {scoreLabel}
       </text>
     </>
   );
 }
 
-function HeroIllustration() {
+interface HeroIllustrationProps {
+  scoreLabel: string;
+  prsAnalyzedLabel: string;
+  qualityBadgeLabel: string;
+}
+
+function HeroIllustration({ scoreLabel, prsAnalyzedLabel, qualityBadgeLabel }: HeroIllustrationProps) {
   const ref = useRef<SVGSVGElement>(null);
   const inView = useInView(ref, { once: true, margin: "-50px" });
 
@@ -173,7 +184,7 @@ function HeroIllustration() {
       <circle cx="108" cy="54" r="6" fill="#35BA80" opacity="0.6" />
 
       {/* Score arc — animated */}
-      <AnimatedScore inView={inView} />
+      <AnimatedScore inView={inView} scoreLabel={scoreLabel} />
 
       {/* Bar chart — bars grow from bottom */}
       {BARS.map((bar, i) => (
@@ -223,7 +234,7 @@ function HeroIllustration() {
           fontWeight="600"
           fill="#1D253B"
         >
-          PRs Analyzed
+          {prsAnalyzedLabel}
         </text>
         <text
           x="390"
@@ -294,7 +305,7 @@ function HeroIllustration() {
           fontWeight="600"
           fill="#35BA80"
         >
-          Quality A
+          {qualityBadgeLabel}
         </text>
       </motion.g>
     </svg>
@@ -379,7 +390,11 @@ export function Hero() {
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
             className="flex w-full max-w-[555px] items-center justify-center lg:flex-1"
           >
-            <HeroIllustration />
+            <HeroIllustration
+              scoreLabel={t("illustration.score")}
+              prsAnalyzedLabel={t("illustration.prsAnalyzed")}
+              qualityBadgeLabel={t("illustration.qualityBadge")}
+            />
           </motion.div>
         </div>
       </div>

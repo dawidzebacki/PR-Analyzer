@@ -21,7 +21,12 @@
     "subtitle": "Get instant AI-powered insights on code quality, impact, and AI usage across your pull requests.",
     "inputPlaceholder": "https://github.com/owner/repo",
     "cta": "Analyze Repository",
-    "trust": "Free • No login required • Public repos only"
+    "trust": "Free • No login required • Public repos only",
+    "illustration": {
+      "score": "Score",
+      "prsAnalyzed": "PRs Analyzed",
+      "qualityBadge": "Quality A"
+    }
   },
   "socialProof": {
     "label": "Trusted by developers at",

@@ -13,11 +13,13 @@ const MOCK_PRS = [
   { title: "chore: bump deps, update lockfile", score: 31 },
 ] as const;
 
-const DIMENSIONS = [
-  { key: "impact", score: 87, label: "Impact" },
-  { key: "aiLeverage", score: 76, label: "AI Leverage" },
-  { key: "quality", score: 89, label: "Quality" },
-] as const;
+const DIMENSION_KEYS = ["impact", "aiLeverage", "quality"] as const;
+
+const DIMENSION_SCORES: Record<(typeof DIMENSION_KEYS)[number], number> = {
+  impact: 87,
+  aiLeverage: 76,
+  quality: 89,
+};
 
 const DIMENSION_COLOR = "#4E43E1";
 
@@ -115,6 +117,7 @@ function getBadgeVariant(score: number): "success" | "warning" | "error" {
 
 export function DashboardPreview() {
   const t = useTranslations("preview");
+  const tScoring = useTranslations("scoring");
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -157,13 +160,13 @@ export function DashboardPreview() {
 
             {/* Dimension mini rings */}
             <div className="mt-8 flex justify-center gap-8 sm:gap-12">
-              {DIMENSIONS.map((dim) => (
+              {DIMENSION_KEYS.map((key) => (
                 <AnimatedRing
-                  key={dim.key}
-                  score={dim.score}
+                  key={key}
+                  score={DIMENSION_SCORES[key]}
                   color={DIMENSION_COLOR}
                   size="sm"
-                  label={dim.label}
+                  label={tScoring(`${key}.title`)}
                   inView={inView}
                 />
               ))}
