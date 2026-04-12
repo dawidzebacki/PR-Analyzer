@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { getScoreColor } from "@/constants";
+import { getScoreColor, getScoreClasses } from "@/constants";
 
 interface ScoreRingProps {
   score: number;
@@ -29,7 +29,7 @@ export function ScoreRing({
   const center = dimension / 2;
   const colorToken = getScoreColor(score);
   const strokeColor = `var(--color-${colorToken})`;
-  const textColorClass = `text-${colorToken}`;
+  const { text: textColorClass } = getScoreClasses(score);
 
   return (
     <div className="inline-flex flex-col items-center gap-1">

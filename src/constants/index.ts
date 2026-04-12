@@ -17,6 +17,18 @@ export function getScoreColor(score: number): string {
   return SCORE_COLORS.green.color;
 }
 
+// Static class map — Tailwind cannot detect dynamically constructed class names
+const SCORE_CLASS_MAP = {
+  "score-red": { text: "text-score-red", bg: "bg-score-red" },
+  "score-yellow": { text: "text-score-yellow", bg: "bg-score-yellow" },
+  "score-green": { text: "text-score-green", bg: "bg-score-green" },
+} as const;
+
+export function getScoreClasses(score: number) {
+  const token = getScoreColor(score) as keyof typeof SCORE_CLASS_MAP;
+  return SCORE_CLASS_MAP[token];
+}
+
 // GitHub
 export const GITHUB_API_BASE = "https://api.github.com";
 export const MAX_PRS_TO_ANALYZE = 20;

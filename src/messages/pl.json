@@ -100,6 +100,24 @@
   "results": {
     "heading": "Wyniki dla {id}"
   },
+  "dashboard": {
+    "repoScore": "Ocena repozytorium",
+    "above90": "Wyjątkowa",
+    "above70": "Mocna",
+    "above40": "Do poprawy",
+    "below40": "Krytyczna",
+    "impact": "Wpływ",
+    "impactDescription": "Wartość biznesowa i znaczące zmiany",
+    "aiLeverage": "Wykorzystanie AI",
+    "aiLeverageDescription": "Ślady rozwoju wspomaganego przez AI",
+    "quality": "Jakość",
+    "qualityDescription": "Doskonałość inżynieryjna i najlepsze praktyki",
+    "scoreBreakdown": "Rozkład ocen",
+    "analyzedAt": "Przeanalizowano {date}",
+    "prCount": "{count} PR-ów przeanalizowanych",
+    "viewOnGithub": "Zobacz na GitHubie",
+    "weight": "Waga: {value}"
+  },
   "footer": {
     "description": "Narzędzie do analizy pull requestów na GitHubie wspierane przez AI.",
     "product": "Produkt",

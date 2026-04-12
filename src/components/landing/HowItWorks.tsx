@@ -1,4 +1,6 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Link2, Brain, BarChart3 } from "lucide-react";
 
 const STEPS = [
@@ -7,8 +9,8 @@ const STEPS = [
   { icon: BarChart3, key: "step3" },
 ] as const;
 
-export async function HowItWorks() {
-  const t = await getTranslations("howItWorks");
+export function HowItWorks() {
+  const t = useTranslations("howItWorks");
 
   return (
     <section id="howItWorks" className="bg-background py-20 lg:py-28">
