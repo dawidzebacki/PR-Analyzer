@@ -72,6 +72,12 @@
       "description": "Doskonałość inżynieryjna: precyzyjny zakres, czysty kod, pokrycie testami i czytelne opisy PR-ów."
     }
   },
+  "cta": {
+    "title": "Gotowy, by przeanalizować swoje PR-y?",
+    "subtitle": "Wklej URL dowolnego publicznego repozytorium GitHub i uzyskaj analizę AI w kilka sekund.",
+    "inputPlaceholder": "https://github.com/właściciel/repo",
+    "button": "Analizuj repozytorium"
+  },
   "preview": {
     "title": "Zobacz swój dashboard w akcji",
     "subtitle": "Podgląd interaktywnego raportu, który otrzymasz — oceny, rozkład wymiarów i szczegóły na poziomie PR-ów.",
