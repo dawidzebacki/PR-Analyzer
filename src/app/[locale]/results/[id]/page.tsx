@@ -1,9 +1,12 @@
 "use client";
 
 import { use } from "react";
-import { useTranslations } from "next-intl";
 import { useResults } from "@/hooks/useResults";
 import { AnalysisLoading } from "@/components/dashboard/AnalysisLoading";
+import { RepoHeader } from "@/components/dashboard/RepoHeader";
+import { TotalScore } from "@/components/dashboard/TotalScore";
+import { ScoreBreakdown } from "@/components/dashboard/ScoreBreakdown";
+import { Container } from "@/components/ui/Container";
 
 interface ResultsPageProps {
   params: Promise<{ locale: string; id: string }>;
@@ -11,7 +14,6 @@ interface ResultsPageProps {
 
 export default function ResultsPage({ params }: ResultsPageProps) {
   const { id } = use(params);
-  const t = useTranslations("results");
   const { data, isLoading, error } = useResults({ id });
 
   if (isLoading) {
@@ -26,14 +28,22 @@ export default function ResultsPage({ params }: ResultsPageProps) {
     );
   }
 
+  if (!data) return null;
+
   return (
-    <div className="mx-auto max-w-[1110px] px-[18px] py-16">
-      <h1 className="font-heading text-[2rem] font-bold leading-[2.375rem] tracking-[-0.0625rem] text-navy lg:text-[3rem] lg:leading-[3.375rem] lg:tracking-[-0.1125rem]">
-        {t("heading", { id })}
-      </h1>
-      <pre className="mt-8 overflow-auto rounded-xl bg-surface p-6 text-sm ring-1 ring-border">
-        {JSON.stringify(data, null, 2)}
-      </pre>
-    </div>
+    <Container className="py-12 lg:py-16">
+      <div className="space-y-10">
+        <RepoHeader
+          repoName={data.repoName}
+          repoUrl={data.repoUrl}
+          analyzedAt={data.analyzedAt}
+          prCount={data.prs.length}
+        />
+
+        <TotalScore score={data.totalScore} />
+
+        <ScoreBreakdown scores={data.scores} />
+      </div>
+    </Container>
   );
 }

@@ -1,4 +1,6 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+
+import { useTranslations } from "next-intl";
 
 const COMPANIES = [
   "vercel",
@@ -9,8 +11,8 @@ const COMPANIES = [
   "supabase",
 ] as const;
 
-export async function SocialProof() {
-  const t = await getTranslations("socialProof");
+export function SocialProof() {
+  const t = useTranslations("socialProof");
 
   return (
     <section className="pb-16 pt-12 lg:pb-20 lg:pt-16">

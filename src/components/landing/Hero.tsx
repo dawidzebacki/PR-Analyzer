@@ -1,9 +1,11 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+
+import { useTranslations } from "next-intl";
 import { HeroForm } from "./HeroForm";
 import { HeroIllustration } from "./HeroIllustration";
 
-export async function Hero() {
-  const t = await getTranslations("hero");
+export function Hero() {
+  const t = useTranslations("hero");
 
   return (
     <section className="pb-16 pt-12 lg:pb-24 lg:pt-20">

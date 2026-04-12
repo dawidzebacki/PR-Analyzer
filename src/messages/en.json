@@ -100,6 +100,24 @@
   "results": {
     "heading": "Results for {id}"
   },
+  "dashboard": {
+    "repoScore": "Repository Score",
+    "above90": "Exceptional",
+    "above70": "Strong",
+    "above40": "Needs Improvement",
+    "below40": "Critical",
+    "impact": "Impact",
+    "impactDescription": "Business value and meaningful changes",
+    "aiLeverage": "AI Leverage",
+    "aiLeverageDescription": "Evidence of AI-assisted development",
+    "quality": "Quality",
+    "qualityDescription": "Engineering excellence and best practices",
+    "scoreBreakdown": "Score Breakdown",
+    "analyzedAt": "Analyzed on {date}",
+    "prCount": "{count} PRs analyzed",
+    "viewOnGithub": "View on GitHub",
+    "weight": "Weight: {value}"
+  },
   "footer": {
     "description": "AI-powered GitHub pull request analysis tool.",
     "product": "Product",

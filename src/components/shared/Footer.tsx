@@ -1,5 +1,7 @@
+"use client";
+
 import { GitBranch } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 
@@ -7,9 +9,9 @@ const PRODUCT_LINKS = ["analyzer", "scoring", "api"] as const;
 const RESOURCE_LINKS = ["docs", "blog", "changelog"] as const;
 const LEGAL_LINKS = ["github", "privacy", "terms"] as const;
 
-export async function Footer() {
-  const t = await getTranslations("footer");
-  const tCommon = await getTranslations("common");
+export function Footer() {
+  const t = useTranslations("footer");
+  const tCommon = useTranslations("common");
 
   return (
     <footer className="border-t border-border bg-surface">
