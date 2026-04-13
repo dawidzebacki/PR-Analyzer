@@ -2,13 +2,13 @@
 
 import { useTranslations } from "next-intl";
 
-const COMPANIES = [
+const TOOLS = [
+  "nextjs",
+  "typescript",
+  "tailwind",
+  "framerMotion",
+  "groq",
   "vercel",
-  "stripe",
-  "shopify",
-  "notion",
-  "linear",
-  "supabase",
 ] as const;
 
 export function SocialProof() {
@@ -22,23 +22,16 @@ export function SocialProof() {
             {t("label")}
           </p>
 
-          <div
-            className="grid w-full grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-6"
-            aria-hidden="true"
-          >
-            {COMPANIES.map((company) => (
-              <span
-                key={company}
-                className="text-center text-2xl font-bold text-text-muted/30 select-none"
+          <ul className="grid w-full grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+            {TOOLS.map((tool) => (
+              <li
+                key={tool}
+                className="flex h-12 items-center justify-center rounded-lg border border-border bg-surface px-4 text-center text-sm font-semibold text-navy transition-colors duration-300 hover:border-primary/40 hover:text-primary"
               >
-                {t(`companies.${company}`)}
-              </span>
+                {t(`tools.${tool}`)}
+              </li>
             ))}
-          </div>
-
-          <p className="text-sm text-text-muted">
-            {t("stat", { count: "12,000" })}
-          </p>
+          </ul>
         </div>
 
         <div className="mt-12 h-px w-full bg-border" />

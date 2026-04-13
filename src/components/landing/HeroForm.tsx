@@ -68,6 +68,7 @@ export function HeroForm({ inputPlaceholder, inputHint, ctaText }: HeroFormProps
       >
         <div className="flex-1">
           <Input
+            id="hero-repo-url"
             placeholder={inputPlaceholder}
             aria-label={inputPlaceholder}
             error={errors.repoUrl?.message}

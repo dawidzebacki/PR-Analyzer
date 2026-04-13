@@ -106,14 +106,17 @@ export function PRCard({ pr, repoUrl }: PRCardProps) {
           <button
             type="button"
             onClick={() => setExpanded(!expanded)}
-            className="flex min-w-0 flex-1 items-center gap-1.5 text-left text-sm font-medium text-text-muted hover:text-primary transition-colors"
+            className="flex min-w-0 flex-1 items-center gap-1.5 text-left text-sm font-medium text-text-muted hover:text-primary transition-colors cursor-pointer"
           >
             <ChevronDown
               className={`h-4 w-4 flex-shrink-0 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
             />
             <span className="truncate">
-              {pr.summary.slice(0, 60)}
-              {pr.summary.length > 60 && !expanded ? "..." : ""}
+              {expanded
+                ? t("hideSummary")
+                : pr.summary.length > 60
+                  ? `${pr.summary.slice(0, 60)}...`
+                  : pr.summary}
             </span>
           </button>
 

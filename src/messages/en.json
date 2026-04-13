@@ -30,15 +30,14 @@
     }
   },
   "socialProof": {
-    "label": "Trusted by developers at",
-    "stat": "{count}+ repositories analyzed",
-    "companies": {
-      "vercel": "Vercel",
-      "stripe": "Stripe",
-      "shopify": "Shopify",
-      "notion": "Notion",
-      "linear": "Linear",
-      "supabase": "Supabase"
+    "label": "Built with",
+    "tools": {
+      "nextjs": "Next.js",
+      "typescript": "TypeScript",
+      "tailwind": "Tailwind CSS",
+      "framerMotion": "Framer Motion",
+      "groq": "Groq + Llama",
+      "vercel": "Vercel"
     }
   },
   "howItWorks": {
@@ -90,6 +89,7 @@
     "step4": "Calculating scores and metrics",
     "step5": "Generating your report",
     "progress": "This usually takes 30–60 seconds",
+    "finalizing": "Almost done — finalizing your report…",
     "funFact1": "The average PR has 50 lines changed",
     "funFact2": "Top teams review PRs within 4 hours",
     "funFact3": "Small PRs get merged 40% faster",
@@ -100,7 +100,7 @@
     "heading": "Results for {id}"
   },
   "dashboard": {
-    "repoScore": "Repository Score",
+    "totalScore": "Total Score",
     "above90": "Exceptional",
     "above70": "Strong",
     "above40": "Needs Improvement",
@@ -113,7 +113,7 @@
     "qualityDescription": "Engineering excellence and best practices",
     "scoreBreakdown": "Score Breakdown",
     "analyzedAt": "Analyzed on {date}",
-    "prCount": "{count} PRs analyzed",
+    "prCount": "{count, plural, =1 {1 PR analyzed} other {# PRs analyzed}}",
     "viewOnGithub": "View on GitHub",
     "weight": "Weight: {value}",
     "pullRequest": "Pull Request",
@@ -124,13 +124,14 @@
     "sortAiLeverage": "AI Leverage",
     "sortQuality": "Quality",
     "sortSize": "Size",
-    "sortDate": "Date",
+    "sortDate": "Number",
+    "hideSummary": "Hide summary",
     "ascending": "Ascending",
     "descending": "Descending",
     "filterByAuthor": "Filter by author",
     "allAuthors": "All authors",
     "searchPrs": "Search PRs...",
-    "filesChanged": "{count} files changed",
+    "filesChanged": "{count, plural, =1 {1 file changed} other {# files changed}}",
     "additions": "+{count}",
     "deletions": "-{count}",
     "viewDiff": "View diff",
@@ -161,15 +162,8 @@
     "description": "AI-powered GitHub pull request analysis tool.",
     "product": "Product",
     "productLinks": {
-      "analyzer": "PR Analyzer",
-      "scoring": "Scoring Model",
-      "api": "API"
-    },
-    "resources": "Resources",
-    "resourceLinks": {
-      "docs": "Documentation",
-      "blog": "Blog",
-      "changelog": "Changelog"
+      "analyzer": "How it works",
+      "scoring": "Scoring Model"
     },
     "links": "Links",
     "legalLinks": {
@@ -178,6 +172,62 @@
       "terms": "Terms of Service"
     },
     "copyright": "© 2025 PR Analyzer. Built with AI."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: April 2026",
+    "intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vehicula nibh nec felis sodales, vitae interdum risus rhoncus. Nulla facilisi.",
+    "sections": {
+      "dataCollection": {
+        "heading": "Information we collect",
+        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu sapien quis nulla facilisis ultricies. Donec faucibus tortor sit amet libero pulvinar, vitae fringilla nulla scelerisque. Curabitur dapibus mauris ac mi tristique ullamcorper."
+      },
+      "dataUsage": {
+        "heading": "How we use your information",
+        "body": "Etiam vitae lacus eu nunc tincidunt fermentum. Mauris in pharetra orci. Nulla tristique velit at sapien venenatis, in luctus quam pretium. Quisque non quam in justo egestas placerat."
+      },
+      "cookies": {
+        "heading": "Cookies and tracking",
+        "body": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
+      },
+      "thirdParty": {
+        "heading": "Third-party services",
+        "body": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident."
+      },
+      "contact": {
+        "heading": "Contact us",
+        "body": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+      }
+    },
+    "disclaimer": "This page is provided as placeholder content for a portfolio project and does not constitute a real privacy policy."
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: April 2026",
+    "intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam erat volutpat. Sed eu mauris non ipsum tempor imperdiet sit amet vel lectus.",
+    "sections": {
+      "acceptance": {
+        "heading": "Acceptance of terms",
+        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Donec velit neque, auctor sit amet aliquam vel."
+      },
+      "usage": {
+        "heading": "Permitted use",
+        "body": "Quisque velit nisi, pretium ut lacinia in, elementum id enim. Vivamus suscipit tortor eget felis porttitor volutpat. Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus."
+      },
+      "limitations": {
+        "heading": "Limitation of liability",
+        "body": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui."
+      },
+      "intellectualProperty": {
+        "heading": "Intellectual property",
+        "body": "Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Cras ultricies ligula sed magna dictum porta. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus."
+      },
+      "termination": {
+        "heading": "Termination",
+        "body": "Donec rutrum congue leo eget malesuada. Nulla porttitor accumsan tincidunt. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Nulla quis lorem ut libero malesuada feugiat."
+      }
+    },
+    "disclaimer": "This page is provided as placeholder content for a portfolio project and does not constitute real terms of service."
   },
   "analysisScope": {
     "title": "What should we analyze?",
