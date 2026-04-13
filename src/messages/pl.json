@@ -30,15 +30,14 @@
     }
   },
   "socialProof": {
-    "label": "Zaufali nam deweloperzy z",
-    "stat": "{count}+ przeanalizowanych repozytoriów",
-    "companies": {
-      "vercel": "Vercel",
-      "stripe": "Stripe",
-      "shopify": "Shopify",
-      "notion": "Notion",
-      "linear": "Linear",
-      "supabase": "Supabase"
+    "label": "Zbudowane z",
+    "tools": {
+      "nextjs": "Next.js",
+      "typescript": "TypeScript",
+      "tailwind": "Tailwind CSS",
+      "framerMotion": "Framer Motion",
+      "groq": "Groq + Llama",
+      "vercel": "Vercel"
     }
   },
   "howItWorks": {
@@ -90,6 +89,7 @@
     "step4": "Obliczanie wyników i metryk",
     "step5": "Generowanie raportu",
     "progress": "To zwykle zajmuje 30–60 sekund",
+    "finalizing": "Już prawie — finalizujemy Twój raport…",
     "funFact1": "Przeciętny PR ma 50 zmienionych linii",
     "funFact2": "Najlepsze zespoły przeglądają PR-y w 4 godziny",
     "funFact3": "Małe PR-y są mergowane 40% szybciej",
@@ -100,7 +100,7 @@
     "heading": "Wyniki dla {id}"
   },
   "dashboard": {
-    "repoScore": "Ocena repozytorium",
+    "totalScore": "Wynik całkowity",
     "above90": "Wyjątkowa",
     "above70": "Mocna",
     "above40": "Do poprawy",
@@ -113,7 +113,7 @@
     "qualityDescription": "Doskonałość inżynieryjna i najlepsze praktyki",
     "scoreBreakdown": "Rozkład ocen",
     "analyzedAt": "Przeanalizowano {date}",
-    "prCount": "{count} PR-ów przeanalizowanych",
+    "prCount": "{count, plural, =1 {1 PR przeanalizowany} few {# PR-y przeanalizowane} many {# PR-ów przeanalizowanych} other {# PR-ów przeanalizowanych}}",
     "viewOnGithub": "Zobacz na GitHubie",
     "weight": "Waga: {value}",
     "pullRequest": "Pull Request",
@@ -124,13 +124,14 @@
     "sortAiLeverage": "Wykorzystanie AI",
     "sortQuality": "Jakość",
     "sortSize": "Rozmiar",
-    "sortDate": "Data",
+    "sortDate": "Numer",
+    "hideSummary": "Ukryj podsumowanie",
     "ascending": "Rosnąco",
     "descending": "Malejąco",
     "filterByAuthor": "Filtruj po autorze",
     "allAuthors": "Wszyscy autorzy",
     "searchPrs": "Szukaj PR-ów...",
-    "filesChanged": "{count} zmienionych plików",
+    "filesChanged": "{count, plural, =1 {1 plik zmieniony} few {# pliki zmienione} many {# plików zmienionych} other {# plików zmienionych}}",
     "additions": "+{count}",
     "deletions": "-{count}",
     "viewDiff": "Zobacz diff",
@@ -161,15 +162,8 @@
     "description": "Narzędzie do analizy pull requestów na GitHubie wspierane przez AI.",
     "product": "Produkt",
     "productLinks": {
-      "analyzer": "Analizator PR",
-      "scoring": "Model oceniania",
-      "api": "API"
-    },
-    "resources": "Zasoby",
-    "resourceLinks": {
-      "docs": "Dokumentacja",
-      "blog": "Blog",
-      "changelog": "Historia zmian"
+      "analyzer": "Jak to działa",
+      "scoring": "Model oceniania"
     },
     "links": "Linki",
     "legalLinks": {
@@ -178,6 +172,62 @@
       "terms": "Regulamin"
     },
     "copyright": "© 2025 PR Analyzer. Zbudowane z AI."
+  },
+  "privacy": {
+    "title": "Polityka prywatności",
+    "lastUpdated": "Ostatnia aktualizacja: kwiecień 2026",
+    "intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vehicula nibh nec felis sodales, vitae interdum risus rhoncus. Nulla facilisi.",
+    "sections": {
+      "dataCollection": {
+        "heading": "Jakie dane zbieramy",
+        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu sapien quis nulla facilisis ultricies. Donec faucibus tortor sit amet libero pulvinar, vitae fringilla nulla scelerisque. Curabitur dapibus mauris ac mi tristique ullamcorper."
+      },
+      "dataUsage": {
+        "heading": "Jak wykorzystujemy dane",
+        "body": "Etiam vitae lacus eu nunc tincidunt fermentum. Mauris in pharetra orci. Nulla tristique velit at sapien venenatis, in luctus quam pretium. Quisque non quam in justo egestas placerat."
+      },
+      "cookies": {
+        "heading": "Pliki cookie i śledzenie",
+        "body": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
+      },
+      "thirdParty": {
+        "heading": "Usługi zewnętrzne",
+        "body": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident."
+      },
+      "contact": {
+        "heading": "Kontakt",
+        "body": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+      }
+    },
+    "disclaimer": "Ta strona zawiera treść zastępczą dla projektu portfolio i nie stanowi rzeczywistej polityki prywatności."
+  },
+  "terms": {
+    "title": "Regulamin",
+    "lastUpdated": "Ostatnia aktualizacja: kwiecień 2026",
+    "intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam erat volutpat. Sed eu mauris non ipsum tempor imperdiet sit amet vel lectus.",
+    "sections": {
+      "acceptance": {
+        "heading": "Akceptacja warunków",
+        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Donec velit neque, auctor sit amet aliquam vel."
+      },
+      "usage": {
+        "heading": "Dozwolone użycie",
+        "body": "Quisque velit nisi, pretium ut lacinia in, elementum id enim. Vivamus suscipit tortor eget felis porttitor volutpat. Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus."
+      },
+      "limitations": {
+        "heading": "Ograniczenie odpowiedzialności",
+        "body": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui."
+      },
+      "intellectualProperty": {
+        "heading": "Własność intelektualna",
+        "body": "Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Cras ultricies ligula sed magna dictum porta. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus."
+      },
+      "termination": {
+        "heading": "Zakończenie",
+        "body": "Donec rutrum congue leo eget malesuada. Nulla porttitor accumsan tincidunt. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Nulla quis lorem ut libero malesuada feugiat."
+      }
+    },
+    "disclaimer": "Ta strona zawiera treść zastępczą dla projektu portfolio i nie stanowi rzeczywistego regulaminu."
   },
   "analysisScope": {
     "title": "Co mamy przeanalizować?",

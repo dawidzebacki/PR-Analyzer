@@ -172,7 +172,7 @@ export function ErrorState({ variant, onAction, actionHref }: ErrorStateProps) {
           <Icon className="h-6 w-6" aria-hidden />
         </div>
         <div className="space-y-2">
-          <h1 className="font-heading text-[1.5rem] font-bold leading-[1.875rem] tracking-[-0.0625rem] text-navy">
+          <h1 className="font-heading text-[1.5rem] font-bold leading-[1.875rem] tracking-[-0.0625rem] text-navy lg:text-[2rem] lg:leading-[2.375rem]">
             {t(titleKey)}
           </h1>
           <p className="text-base text-text-muted">{t(messageKey)}</p>

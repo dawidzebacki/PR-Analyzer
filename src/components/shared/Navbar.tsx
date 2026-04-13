@@ -7,7 +7,8 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 
-const NAV_LINKS = ["howItWorks", "scoring", "github"] as const;
+const ANCHOR_LINKS = ["howItWorks", "scoring"] as const;
+const GITHUB_URL = "https://github.com/dawidzebacki/PR-Analyzer";
 
 export function Navbar() {
   const t = useTranslations("nav");
@@ -19,6 +20,17 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const otherLocale = locale === "en" ? "pl" : "en";
+
+  function scrollToHero() {
+    const input = document.getElementById("hero-repo-url");
+    if (input) {
+      input.scrollIntoView({ behavior: "smooth", block: "center" });
+      // Defer focus until after smooth scroll begins to avoid jump
+      window.setTimeout(() => input.focus({ preventScroll: true }), 300);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
 
   useEffect(() => {
     function handleScroll() {
@@ -56,7 +68,7 @@ export function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-8 lg:flex">
-          {NAV_LINKS.map((key) => (
+          {ANCHOR_LINKS.map((key) => (
             <a
               key={key}
               href={`#${key}`}
@@ -65,12 +77,20 @@ export function Navbar() {
               {t(key)}
             </a>
           ))}
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-base font-semibold leading-[22px] text-navy transition-colors duration-300 hover:text-primary"
+          >
+            {t("github")}
+          </a>
 
           {/* Language switcher */}
           <Link
             href={pathname}
             locale={otherLocale}
-            onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
+            onClick={() => scrollToHero()}
             className="flex items-center gap-1.5 text-sm font-medium text-text-secondary transition-colors duration-300 hover:text-primary"
           >
             <Globe className="h-4 w-4" />
@@ -87,7 +107,7 @@ export function Navbar() {
             <Button
               variant="primary"
               size="sm"
-              onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
+              onClick={() => scrollToHero()}
             >
               {t("cta")}
             </Button>
@@ -98,7 +118,7 @@ export function Navbar() {
         <button
           type="button"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="-mr-2 flex h-11 w-11 items-center justify-center lg:hidden"
+          className="-mr-2 flex h-11 w-11 cursor-pointer items-center justify-center lg:hidden"
           aria-label={isMobileMenuOpen ? t("closeMenu") : t("openMenu")}
         >
           {isMobileMenuOpen ? (
@@ -120,7 +140,7 @@ export function Navbar() {
             className="fixed inset-0 top-[66px] z-40 bg-surface lg:hidden"
           >
             <div className="flex flex-col gap-6 px-[18px] pt-8">
-              {NAV_LINKS.map((key) => (
+              {ANCHOR_LINKS.map((key) => (
                 <a
                   key={key}
                   href={`#${key}`}
@@ -130,6 +150,15 @@ export function Navbar() {
                   {t(key)}
                 </a>
               ))}
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-lg font-semibold text-navy transition-colors duration-300 hover:text-primary"
+              >
+                {t("github")}
+              </a>
 
               <Link
                 href={pathname}
@@ -137,7 +166,7 @@ export function Navbar() {
                 className="flex items-center gap-1.5 text-base font-medium text-text-secondary transition-colors duration-300 hover:text-primary"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  window.scrollTo({ top: 0, behavior: "instant" });
+                  scrollToHero();
                 }}
               >
                 <Globe className="h-4 w-4" />
@@ -150,7 +179,7 @@ export function Navbar() {
                 className="mt-2 w-full"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  window.scrollTo({ top: 0, behavior: "instant" });
+                  scrollToHero();
                 }}
               >
                 {t("cta")}

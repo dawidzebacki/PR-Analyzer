@@ -47,6 +47,8 @@ export function AnalysisLoading() {
     return () => clearInterval(interval);
   }, []);
 
+  const isFinalizing = activeStep === STEPS.length - 1;
+
   useEffect(() => {
     const interval = setInterval(() => {
       setFunFactIndex((prev) => (prev + 1) % FUN_FACT_KEYS.length);
@@ -155,9 +157,17 @@ export function AnalysisLoading() {
         </div>
 
         {/* Progress hint */}
-        <p className="mt-8 text-center text-sm text-text-muted">
-          {t("progress")}
-        </p>
+        <div className="mt-8 flex items-center justify-center gap-2 text-sm text-text-muted">
+          {isFinalizing && (
+            <motion.span
+              className="h-3 w-3 rounded-full border-2 border-primary border-t-transparent"
+              animate={{ rotate: 360 }}
+              transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+              aria-hidden
+            />
+          )}
+          <p>{isFinalizing ? t("finalizing") : t("progress")}</p>
+        </div>
 
         {/* Fun fact */}
         <div className="mt-4 flex justify-center">

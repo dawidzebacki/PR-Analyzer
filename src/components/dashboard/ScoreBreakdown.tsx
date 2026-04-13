@@ -129,13 +129,13 @@ export function ScoreBreakdown({ scores }: ScoreBreakdownProps) {
           const Icon = dim.icon;
 
           return (
-            <motion.div key={dim.key} variants={itemVariants}>
-              <Card className="flex flex-col items-center gap-4 text-center">
+            <motion.div key={dim.key} variants={itemVariants} className="h-full">
+              <Card className="flex h-full flex-col items-center gap-4 text-center">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <Icon className="h-6 w-6" />
                 </div>
                 <ScoreRing score={scores[dim.key]} size="sm" animated />
-                <div>
+                <div className="mt-auto">
                   <h3 className="font-heading text-lg font-bold text-navy">
                     {t(dim.key)}
                   </h3>

@@ -140,7 +140,7 @@ export function ScoringDimensions() {
               <motion.div
                 key={dim.key}
                 variants={fadeInUp}
-                className="flex flex-col items-center rounded-xl border border-border bg-background p-8 text-center"
+                className="flex h-full flex-col items-center rounded-xl border border-border bg-background p-8 text-center"
               >
                 <div
                   className={`flex h-14 w-14 items-center justify-center rounded-xl ${dim.bgColor}`}
@@ -156,7 +156,7 @@ export function ScoringDimensions() {
                   {t(`${dim.key}.description`)}
                 </p>
 
-                <div className="mt-6">
+                <div className="mt-auto pt-6">
                   <ScoreRing score={dim.score} color={dim.color} inView={inView} />
                 </div>
               </motion.div>

@@ -83,7 +83,7 @@ export function AuthorStats({ authorStats, prs, repoAvg }: AuthorStatsProps) {
               id="author-sort"
               value={sortField}
               onChange={(e) => setSortField(e.target.value as SortField)}
-              className="rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/30"
+              className="cursor-pointer rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/30"
             >
               {SORT_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>

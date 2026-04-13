@@ -70,7 +70,7 @@ export function PRListControls({
           id="sort-field"
           value={sortField}
           onChange={(e) => onSortFieldChange(e.target.value as SortField)}
-          className="rounded-lg border border-border bg-surface px-3 py-2.5 text-sm text-text outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/30"
+          className="cursor-pointer rounded-lg border border-border bg-surface px-3 py-2.5 text-sm text-text outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/30"
         >
           {SORT_OPTIONS.map((opt) => (
             <option key={opt.value} value={opt.value}>
@@ -83,7 +83,7 @@ export function PRListControls({
           onClick={() =>
             onSortDirectionChange(sortDirection === "asc" ? "desc" : "asc")
           }
-          className="flex items-center gap-1.5 rounded-lg border border-border bg-surface px-3 py-2.5 text-sm text-text transition-colors hover:border-primary hover:text-primary"
+          className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-border bg-surface px-3 py-2.5 text-sm text-text transition-colors hover:border-primary hover:text-primary"
           aria-label={
             sortDirection === "asc" ? t("ascending") : t("descending")
           }
@@ -99,7 +99,7 @@ export function PRListControls({
       <select
         value={authorFilter}
         onChange={(e) => onAuthorFilterChange(e.target.value)}
-        className="w-full rounded-lg border border-border bg-surface px-3 py-2.5 text-sm text-text outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/30 sm:w-auto"
+        className="w-full cursor-pointer rounded-lg border border-border bg-surface px-3 py-2.5 text-sm text-text outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/30 sm:w-auto"
       >
         <option value="">{t("allAuthors")}</option>
         {authors.map((author) => (

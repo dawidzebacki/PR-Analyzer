@@ -18,6 +18,8 @@ Will be distilled into README sections (Design Decisions, AI Usage, What I'd Do 
 - feat/single-pr-analysis: Reduced MAX_PRS_TO_ANALYZE from 20 to 5 — keeps prompts within model context and analysis snappy now that single-PR mode exists for deep dives
 - feat/dashboard-export-share: Share URL only encodes repoUrl (`?repo=`), not scope/typeFilter — RepoAnalysis doesn't persist those; on expired re-analyze user picks scope again via dialog
 - feat/dashboard-export-share: PNG badge canvas uses hex literals instead of design tokens — canvas has no Tailwind; values copied from CLAUDE.md token table
+- fix/code-review-pass: Renamed `repoScore` → `totalScore` ("Total Score") — we analyze max ~5 PRs, not the whole repo, so "Repository Score" was misleading
+- fix/code-review-pass: Equal-height tile pattern uses `h-full` on grid child + `flex flex-col` + `mt-auto` on the element to push to bottom — applied to ScoringDimensions (rings) and ScoreBreakdown (descriptions); easy to regress if `h-full` gets dropped
 
 ## Issues & Fixes
 

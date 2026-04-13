@@ -29,9 +29,9 @@ export function TotalScore({ score }: TotalScoreProps) {
         <div className="flex flex-col items-center gap-2">
           <h2
             id="total-score-heading"
-            className="font-heading text-xl font-bold text-navy"
+            className="font-heading text-[1.5rem] font-bold leading-[1.875rem] tracking-[-0.0625rem] text-navy lg:text-[2rem] lg:leading-[2.375rem]"
           >
-            {t("repoScore")}
+            {t("totalScore")}
           </h2>
           <Badge variant={tier.variant}>{t(tier.key)}</Badge>
         </div>

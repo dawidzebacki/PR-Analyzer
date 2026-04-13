@@ -5,9 +5,47 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 
-const PRODUCT_LINKS = ["analyzer", "scoring", "api"] as const;
-const RESOURCE_LINKS = ["docs", "blog", "changelog"] as const;
-const LEGAL_LINKS = ["github", "privacy", "terms"] as const;
+const GITHUB_URL = "https://github.com/dawidzebacki/PR-Analyzer";
+
+interface FooterLink {
+  key: string;
+  href: string;
+  external?: boolean;
+}
+
+const PRODUCT_LINKS: FooterLink[] = [
+  { key: "analyzer", href: "/#howItWorks" },
+  { key: "scoring", href: "/#scoring" },
+];
+
+const LEGAL_LINKS: FooterLink[] = [
+  { key: "github", href: GITHUB_URL, external: true },
+  { key: "privacy", href: "/privacy" },
+  { key: "terms", href: "/terms" },
+];
+
+const linkClass =
+  "text-sm font-medium text-navy transition-colors duration-300 hover:text-primary cursor-pointer";
+
+function FooterLinkItem({ link, label }: { link: FooterLink; label: string }) {
+  if (link.external) {
+    return (
+      <a
+        href={link.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={linkClass}
+      >
+        {label}
+      </a>
+    );
+  }
+  return (
+    <Link href={link.href} className={linkClass}>
+      {label}
+    </Link>
+  );
+}
 
 export function Footer() {
   const t = useTranslations("footer");
@@ -19,14 +57,14 @@ export function Footer() {
         {/* Main grid */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Logo + description */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-2">
             <Link href="/" className="mb-4 flex items-center gap-2">
               <GitBranch className="h-6 w-6 text-primary" />
               <span className="text-lg font-semibold text-navy">
                 {tCommon("appName")}
               </span>
             </Link>
-            <p className="text-sm leading-relaxed text-text-muted">
+            <p className="max-w-sm text-sm leading-relaxed text-text-muted">
               {t("description")}
             </p>
           </div>
@@ -37,33 +75,12 @@ export function Footer() {
               {t("product")}
             </h4>
             <ul className="flex flex-col gap-3">
-              {PRODUCT_LINKS.map((key) => (
-                <li key={key}>
-                  <a
-                    href="#"
-                    className="text-sm font-medium text-navy transition-colors duration-300 hover:text-primary"
-                  >
-                    {t(`productLinks.${key}`)}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources links */}
-          <div>
-            <h4 className="mb-4 text-sm font-semibold text-navy">
-              {t("resources")}
-            </h4>
-            <ul className="flex flex-col gap-3">
-              {RESOURCE_LINKS.map((key) => (
-                <li key={key}>
-                  <a
-                    href="#"
-                    className="text-sm font-medium text-navy transition-colors duration-300 hover:text-primary"
-                  >
-                    {t(`resourceLinks.${key}`)}
-                  </a>
+              {PRODUCT_LINKS.map((link) => (
+                <li key={link.key}>
+                  <FooterLinkItem
+                    link={link}
+                    label={t(`productLinks.${link.key}`)}
+                  />
                 </li>
               ))}
             </ul>
@@ -75,14 +92,12 @@ export function Footer() {
               {t("links")}
             </h4>
             <ul className="flex flex-col gap-3">
-              {LEGAL_LINKS.map((key) => (
-                <li key={key}>
-                  <a
-                    href="#"
-                    className="text-sm font-medium text-navy transition-colors duration-300 hover:text-primary"
-                  >
-                    {t(`legalLinks.${key}`)}
-                  </a>
+              {LEGAL_LINKS.map((link) => (
+                <li key={link.key}>
+                  <FooterLinkItem
+                    link={link}
+                    label={t(`legalLinks.${link.key}`)}
+                  />
                 </li>
               ))}
             </ul>
@@ -92,7 +107,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
           <p className="text-sm text-text-muted">{t("copyright")}</p>
-          <LocaleSwitcher className="flex items-center gap-1.5 text-sm font-medium text-text-secondary transition-colors duration-300 hover:text-primary" />
+          <LocaleSwitcher className="flex items-center gap-1.5 text-sm font-medium text-text-secondary transition-colors duration-300 hover:text-primary cursor-pointer" />
         </div>
       </div>
     </footer>
