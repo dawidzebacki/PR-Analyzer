@@ -38,7 +38,7 @@ export function Button({
   };
 
   const sizes = {
-    sm: "h-auto px-5 py-2 text-sm",
+    sm: "min-h-[44px] px-5 py-2 text-sm",
     md: "h-12 px-8 text-base",
     lg: "h-[60px] px-[50px] text-base",
   };

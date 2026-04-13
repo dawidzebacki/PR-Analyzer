@@ -23,7 +23,7 @@ export function SocialProof() {
           </p>
 
           <div
-            className="grid w-full grid-cols-3 gap-y-6 lg:grid-cols-6"
+            className="grid w-full grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-6"
             aria-hidden="true"
           >
             {COMPANIES.map((company) => (
