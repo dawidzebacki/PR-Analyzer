@@ -146,7 +146,9 @@
     "repoAverage": "Repo avg",
     "sortAuthorName": "Name",
     "sortAuthorPrCount": "PR count",
-    "sortAuthorScore": "Avg score"
+    "sortAuthorScore": "Avg score",
+    "recommendations": "Recommendations",
+    "recommendationsSubtitle": "AI-generated suggestions to improve your pull request practices."
   },
   "footer": {
     "description": "AI-powered GitHub pull request analysis tool.",
