@@ -7,6 +7,7 @@ import { FileCode2, ExternalLink, ChevronDown } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { ScoreRing } from "@/components/ui/ScoreRing";
+import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 import { getScoreClasses } from "@/constants";
 import type { PRAnalysis } from "@/types/scoring";
 
@@ -53,9 +54,10 @@ export function PRCard({ pr, repoUrl }: PRCardProps) {
 
           <div className="flex-shrink-0">
             <Badge variant={getScoreBadgeVariant(pr.scores.total)} size="md">
-              <span className={`font-bold ${totalTextClass}`}>
-                {pr.scores.total}
-              </span>
+              <AnimatedNumber
+                value={pr.scores.total}
+                className={`font-bold ${totalTextClass}`}
+              />
             </Badge>
           </div>
         </div>
@@ -82,16 +84,19 @@ export function PRCard({ pr, repoUrl }: PRCardProps) {
               score={pr.scores.impact}
               size="sm"
               label={t("impact")}
+              animated
             />
             <ScoreRing
               score={pr.scores.aiLeverage}
               size="sm"
               label={t("aiLeverage")}
+              animated
             />
             <ScoreRing
               score={pr.scores.quality}
               size="sm"
               label={t("quality")}
+              animated
             />
           </div>
         </div>

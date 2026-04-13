@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { ExternalLink, GitPullRequest, Calendar } from "lucide-react";
+import { sectionVariants } from "@/lib/animations";
 
 interface RepoHeaderProps {
   repoName: string;
@@ -26,11 +27,7 @@ export function RepoHeader({
   });
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <motion.div variants={sectionVariants}>
       <h1 className="font-heading text-[2rem] font-bold leading-[2.375rem] tracking-[-0.0625rem] text-navy lg:text-[3rem] lg:leading-[3.375rem] lg:tracking-[-0.1125rem]">
         {repoName}
       </h1>

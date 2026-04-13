@@ -5,6 +5,11 @@ import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { AuthorCard } from "@/components/dashboard/AuthorCard";
 import type { AuthorStats as AuthorStatsType, PRAnalysis, PRScore } from "@/types/scoring";
+import {
+  itemContainerVariants,
+  itemVariants,
+  sectionVariants,
+} from "@/lib/animations";
 
 interface AuthorStatsProps {
   authorStats: AuthorStatsType[];
@@ -53,12 +58,7 @@ export function AuthorStats({ authorStats, prs, repoAvg }: AuthorStatsProps) {
   const isSinglePrMode = prs.length === 1 && authorStats.length === 1;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.4 }}
-      className="space-y-6"
-    >
+    <motion.div variants={sectionVariants} className="space-y-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="font-heading text-[1.5rem] font-bold leading-[1.875rem] tracking-[-0.0625rem] text-navy lg:text-[2rem] lg:leading-[2.375rem]">
           {t("authors")}
@@ -93,18 +93,16 @@ export function AuthorStats({ authorStats, prs, repoAvg }: AuthorStatsProps) {
           <AuthorCard stats={authorStats[0]} prs={prs} repoAvg={repoAvg} />
         </div>
       ) : (
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {sorted.map((stats, index) => (
-            <motion.div
-              key={stats.author}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.5 + index * 0.08 }}
-            >
+        <motion.div
+          className="grid gap-6 md:grid-cols-2 xl:grid-cols-3"
+          variants={itemContainerVariants}
+        >
+          {sorted.map((stats) => (
+            <motion.div key={stats.author} layout variants={itemVariants}>
               <AuthorCard stats={stats} prs={prs} repoAvg={repoAvg} />
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       )}
     </motion.div>
   );
