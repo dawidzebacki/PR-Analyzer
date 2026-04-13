@@ -135,7 +135,18 @@
     "deletions": "-{count}",
     "viewDiff": "Zobacz diff",
     "noResults": "Żadne PR-y nie pasują do filtrów",
-    "prNumber": "#{number}"
+    "prNumber": "#{number}",
+    "authors": "Autorzy",
+    "prsCount": "{count, plural, =1 {1 PR} few {# PR-y} many {# PR-ów} other {# PR-ów}}",
+    "avgScore": "Śr. wynik",
+    "merged": "{count} zmergowane",
+    "open": "{count} otwarte",
+    "closed": "{count} zamknięte",
+    "authorAverage": "Autor",
+    "repoAverage": "Śr. repo",
+    "sortAuthorName": "Nazwa",
+    "sortAuthorPrCount": "Liczba PR-ów",
+    "sortAuthorScore": "Śr. wynik"
   },
   "footer": {
     "description": "Narzędzie do analizy pull requestów na GitHubie wspierane przez AI.",

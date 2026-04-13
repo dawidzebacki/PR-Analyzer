@@ -135,7 +135,18 @@
     "deletions": "-{count}",
     "viewDiff": "View diff",
     "noResults": "No PRs match your filters",
-    "prNumber": "#{number}"
+    "prNumber": "#{number}",
+    "authors": "Authors",
+    "prsCount": "{count, plural, =1 {1 PR} other {# PRs}}",
+    "avgScore": "Avg score",
+    "merged": "{count} merged",
+    "open": "{count} open",
+    "closed": "{count} closed",
+    "authorAverage": "Author",
+    "repoAverage": "Repo avg",
+    "sortAuthorName": "Name",
+    "sortAuthorPrCount": "PR count",
+    "sortAuthorScore": "Avg score"
   },
   "footer": {
     "description": "AI-powered GitHub pull request analysis tool.",

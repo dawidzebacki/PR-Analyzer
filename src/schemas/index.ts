@@ -35,6 +35,8 @@ export const authorStatSchema = z.object({
   prs: z.array(z.number().int()),
 });
 
+export const prStateSchema = z.enum(["open", "closed"]);
+
 // --- PR Analysis ---
 
 export const prAnalysisSchema = z.object({
@@ -42,6 +44,8 @@ export const prAnalysisSchema = z.object({
   title: z.string(),
   author: z.string(),
   description: z.string(),
+  state: prStateSchema,
+  mergedAt: z.string().nullable(),
   filesChanged: z.number().int().min(0),
   additions: z.number().int().min(0),
   deletions: z.number().int().min(0),

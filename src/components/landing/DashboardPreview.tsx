@@ -19,6 +19,8 @@ const MOCK_PR: PRAnalysis = {
   title: "feat: add OAuth2 login flow",
   author: "maintainer",
   description: "Adds OAuth2 provider with Google and GitHub.",
+  state: "closed",
+  mergedAt: "2026-01-15T10:30:00.000Z",
   filesChanged: 12,
   additions: 287,
   deletions: 43,
