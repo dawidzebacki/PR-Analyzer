@@ -23,6 +23,7 @@ export function Hero() {
 
             <HeroForm
               inputPlaceholder={t("inputPlaceholder")}
+              inputHint={t("inputHint")}
               ctaText={t("cta")}
             />
 

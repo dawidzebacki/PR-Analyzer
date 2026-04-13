@@ -8,7 +8,7 @@ interface CacheEntry {
 
 const cache = new Map<string, CacheEntry>();
 
-export function generateKey(repoUrl: string): string {
+export function generateKey(repoUrl: string, variant?: string): string {
   const normalized = repoUrl
     .trim()
     .toLowerCase()
@@ -16,9 +16,11 @@ export function generateKey(repoUrl: string): string {
     .replace(/\.git$/, "")
     .replace(/^https?:\/\//, "");
 
+  const source = variant ? `${normalized}?${variant}` : normalized;
+
   let hash = 0;
-  for (let i = 0; i < normalized.length; i++) {
-    const char = normalized.charCodeAt(i);
+  for (let i = 0; i < source.length; i++) {
+    const char = source.charCodeAt(i);
     hash = ((hash << 5) - hash + char) | 0;
   }
 

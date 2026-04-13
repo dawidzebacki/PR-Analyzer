@@ -1,13 +1,19 @@
 import { z } from "zod/v4";
 
+import { PR_SCOPES, PR_TYPE_PREFIXES } from "@/constants";
+
 // --- Primitives ---
 
 export const repoUrlSchema = z
   .url({ error: "Please enter a valid URL" })
   .regex(
     /github\.com\/[\w.-]+\/[\w.-]+/,
-    "URL must be a valid GitHub repository (e.g. github.com/owner/repo)",
+    "URL must be a valid GitHub repository or pull request (e.g. github.com/owner/repo or github.com/owner/repo/pull/123)",
   );
+
+export const prScopeSchema = z.enum(PR_SCOPES);
+
+export const prTypeFilterSchema = z.array(z.enum(PR_TYPE_PREFIXES));
 
 export const scoreSchema = z.number().min(0).max(100);
 
@@ -60,4 +66,6 @@ export const repoAnalysisSchema = z.object({
 
 export const analyzeRequestSchema = z.object({
   repoUrl: repoUrlSchema,
+  scope: prScopeSchema.default("merged"),
+  typeFilter: prTypeFilterSchema.optional(),
 });

@@ -14,11 +14,14 @@ Will be distilled into README sections (Design Decisions, AI Usage, What I'd Do 
 - Added .gitattributes with eol=lf to fix CRLF warnings on Windows (core.autocrlf=true globally)
 - PR#15: Darkened text-muted from #8C8FA3 to #6B6F85 — original passport-photo.online color failed WCAG AA (2.94:1 on bg-background)
 - PR#19: Switched scoring LLM from Claude (claude-sonnet-4-20250514) to Gemini (gemini-2.0-flash) — Gemini has a free API tier, Claude required paid credits
+- feat/single-pr-analysis: Switched scoring LLM from Gemini to Groq (llama-3.3-70b-versatile) — faster inference, generous free tier
+- feat/single-pr-analysis: Reduced MAX_PRS_TO_ANALYZE from 20 to 5 — keeps prompts within model context and analysis snappy now that single-PR mode exists for deep dives
 
 ## Issues & Fixes
 
 <!-- Things that broke, what you tried, what worked -->
 - PR#17: LLMScoringResponse type was missing `number` field — tsc caught it, added to types/scoring.ts
+- feat/single-pr-analysis: Groq JSON mode requires an object response, not a bare array — wrapped LLM output as `{ "prs": [...] }` and unwrap in parser
 
 ## AI Observations
 

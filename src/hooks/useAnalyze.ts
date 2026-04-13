@@ -3,6 +3,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "@/i18n/navigation";
 import type { AnalyzeResponse } from "@/types/api";
+import type { PRScope, PRTypePrefix } from "@/constants";
 
 export class AnalyzeError extends Error {
   code: string;
@@ -14,13 +15,19 @@ export class AnalyzeError extends Error {
   }
 }
 
-async function analyzeRepo(repoUrl: string): Promise<{ id: string }> {
+export interface AnalyzeParams {
+  repoUrl: string;
+  scope?: PRScope;
+  typeFilter?: PRTypePrefix[];
+}
+
+async function analyzeRepo(params: AnalyzeParams): Promise<{ id: string }> {
   let res: Response;
   try {
     res = await fetch("/api/analyze", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ repoUrl }),
+      body: JSON.stringify(params),
     });
   } catch {
     throw new AnalyzeError("Network error", "NETWORK_ERROR");
@@ -39,7 +46,7 @@ export function useAnalyze() {
   const router = useRouter();
 
   const mutation = useMutation({
-    mutationFn: (repoUrl: string) => analyzeRepo(repoUrl),
+    mutationFn: (params: AnalyzeParams) => analyzeRepo(params),
     onSuccess: ({ id }) => {
       router.push(`/results/${id}`);
     },

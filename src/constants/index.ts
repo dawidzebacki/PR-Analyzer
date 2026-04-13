@@ -31,7 +31,24 @@ export function getScoreClasses(score: number) {
 
 // GitHub
 export const GITHUB_API_BASE = "https://api.github.com";
-export const MAX_PRS_TO_ANALYZE = 20;
+export const MAX_PRS_TO_ANALYZE = 5;
+
+export const PR_TYPE_PREFIXES = [
+  "feat",
+  "fix",
+  "chore",
+  "docs",
+  "refactor",
+  "style",
+  "test",
+  "perf",
+] as const;
+
+export type PRTypePrefix = (typeof PR_TYPE_PREFIXES)[number];
+
+export const PR_SCOPES = ["all", "merged", "open", "closed"] as const;
+
+export type PRScope = (typeof PR_SCOPES)[number];
 
 // Cache
 export const CACHE_TTL_MS = 3_600_000; // 1 hour

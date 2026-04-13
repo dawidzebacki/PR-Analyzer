@@ -15,8 +15,9 @@ vi.mock("@/lib/github", async (importOriginal) => {
   const actual = await importOriginal<typeof github>();
   return {
     ...actual,
-    parseRepoUrl: vi.fn(() => ({ owner: "owner", repo: "repo" })),
-    fetchMergedPRs: vi.fn(() => Promise.resolve([])),
+    parseGitHubUrl: vi.fn(() => ({ owner: "owner", repo: "repo" })),
+    fetchPRs: vi.fn(() => Promise.resolve([])),
+    fetchSinglePR: vi.fn(() => Promise.resolve([])),
   };
 });
 
@@ -49,8 +50,9 @@ describe("POST /api/analyze", () => {
     vi.mocked(cache.generateKey).mockReturnValue("repo_abc123");
     vi.mocked(cache.get).mockReturnValue(null);
     vi.mocked(cache.set).mockImplementation(() => {});
-    vi.mocked(github.parseRepoUrl).mockReturnValue({ owner: "owner", repo: "repo" });
-    vi.mocked(github.fetchMergedPRs).mockResolvedValue([]);
+    vi.mocked(github.parseGitHubUrl).mockReturnValue({ owner: "owner", repo: "repo" });
+    vi.mocked(github.fetchPRs).mockResolvedValue([]);
+    vi.mocked(github.fetchSinglePR).mockResolvedValue([]);
     vi.mocked(scoring.scorePullRequests).mockResolvedValue(mockAnalysis);
   });
 
@@ -62,6 +64,48 @@ describe("POST /api/analyze", () => {
     expect(body.success).toBe(true);
     expect(body.data.repoName).toBe("owner/repo");
     expect(body.data.totalScore).toBe(65);
+    expect(github.fetchPRs).toHaveBeenCalled();
+    expect(github.fetchSinglePR).not.toHaveBeenCalled();
+  });
+
+  it("uses fetchSinglePR when URL points to a specific PR", async () => {
+    vi.mocked(github.parseGitHubUrl).mockReturnValue({
+      owner: "owner",
+      repo: "repo",
+      prNumber: 42,
+    });
+
+    const res = await POST(
+      jsonRequest({ repoUrl: "https://github.com/owner/repo/pull/42" }),
+    );
+    const body = await res.json();
+
+    expect(res.status).toBe(200);
+    expect(body.success).toBe(true);
+    expect(github.fetchSinglePR).toHaveBeenCalledWith(
+      "owner",
+      "repo",
+      42,
+      expect.anything(),
+    );
+    expect(github.fetchPRs).not.toHaveBeenCalled();
+  });
+
+  it("passes scope and typeFilter to fetchPRs", async () => {
+    await POST(
+      jsonRequest({
+        repoUrl: "https://github.com/owner/repo",
+        scope: "open",
+        typeFilter: ["feat", "fix"],
+      }),
+    );
+
+    expect(github.fetchPRs).toHaveBeenCalledWith(
+      "owner",
+      "repo",
+      { scope: "open", typeFilter: ["feat", "fix"] },
+      expect.anything(),
+    );
   });
 
   it("returns cached result on second request", async () => {
@@ -73,7 +117,7 @@ describe("POST /api/analyze", () => {
     expect(res.status).toBe(200);
     expect(body.success).toBe(true);
     expect(body.data.repoName).toBe("owner/repo");
-    expect(github.fetchMergedPRs).not.toHaveBeenCalled();
+    expect(github.fetchPRs).not.toHaveBeenCalled();
     expect(scoring.scorePullRequests).not.toHaveBeenCalled();
   });
 
@@ -111,7 +155,7 @@ describe("POST /api/analyze", () => {
   });
 
   it("returns 404 for nonexistent repo", async () => {
-    vi.mocked(github.fetchMergedPRs).mockRejectedValue(
+    vi.mocked(github.fetchPRs).mockRejectedValue(
       new github.RepoNotFoundError("owner", "repo"),
     );
 
@@ -123,8 +167,28 @@ describe("POST /api/analyze", () => {
     expect(body.code).toBe("REPO_NOT_FOUND");
   });
 
+  it("returns 404 for nonexistent PR", async () => {
+    vi.mocked(github.parseGitHubUrl).mockReturnValue({
+      owner: "owner",
+      repo: "repo",
+      prNumber: 9999,
+    });
+    vi.mocked(github.fetchSinglePR).mockRejectedValue(
+      new github.PRNotFoundError("owner", "repo", 9999),
+    );
+
+    const res = await POST(
+      jsonRequest({ repoUrl: "https://github.com/owner/repo/pull/9999" }),
+    );
+    const body = await res.json();
+
+    expect(res.status).toBe(404);
+    expect(body.success).toBe(false);
+    expect(body.code).toBe("PR_NOT_FOUND");
+  });
+
   it("returns 403 for private repo", async () => {
-    vi.mocked(github.fetchMergedPRs).mockRejectedValue(
+    vi.mocked(github.fetchPRs).mockRejectedValue(
       new github.RepoPrivateError("owner", "repo"),
     );
 
@@ -136,8 +200,8 @@ describe("POST /api/analyze", () => {
     expect(body.code).toBe("ACCESS_DENIED");
   });
 
-  it("returns 403 for rate limit", async () => {
-    vi.mocked(github.fetchMergedPRs).mockRejectedValue(
+  it("returns 403 for GitHub rate limit", async () => {
+    vi.mocked(github.fetchPRs).mockRejectedValue(
       new github.RateLimitError(new Date()),
     );
 
@@ -146,11 +210,11 @@ describe("POST /api/analyze", () => {
 
     expect(res.status).toBe(403);
     expect(body.success).toBe(false);
-    expect(body.code).toBe("RATE_LIMIT");
+    expect(body.code).toBe("GITHUB_RATE_LIMIT");
   });
 
-  it("returns 422 when repo has no merged PRs", async () => {
-    vi.mocked(github.fetchMergedPRs).mockRejectedValue(
+  it("returns 422 when repo has no matching PRs", async () => {
+    vi.mocked(github.fetchPRs).mockRejectedValue(
       new github.NoPullRequestsError("owner", "repo"),
     );
 
@@ -167,7 +231,6 @@ describe("POST /api/analyze", () => {
       () => new Promise((_, reject) => setTimeout(() => reject(new Error("TIMEOUT")), 10)),
     );
 
-    // Override the route's Promise.race by making scoring reject with TIMEOUT
     const res = await POST(jsonRequest({ repoUrl: "https://github.com/owner/repo" }));
     const body = await res.json();
 
@@ -177,7 +240,7 @@ describe("POST /api/analyze", () => {
   });
 
   it("returns 500 for unexpected errors", async () => {
-    vi.mocked(github.fetchMergedPRs).mockRejectedValue(new Error("Something broke"));
+    vi.mocked(github.fetchPRs).mockRejectedValue(new Error("Something broke"));
 
     const res = await POST(jsonRequest({ repoUrl: "https://github.com/owner/repo" }));
     const body = await res.json();

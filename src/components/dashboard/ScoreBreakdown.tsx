@@ -80,7 +80,8 @@ export function ScoreBreakdown({ scores }: ScoreBreakdownProps) {
               <PolarRadiusAxis
                 angle={90}
                 domain={[0, 100]}
-                tick={{ fill: "var(--color-text-muted)", fontSize: 11 }}
+                tick={false}
+                axisLine={false}
                 tickCount={6}
               />
               <Radar
