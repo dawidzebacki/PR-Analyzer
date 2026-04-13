@@ -15,6 +15,7 @@ import { GitMerge, GitPullRequest, GitPullRequestClosed } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { ScoreRing } from "@/components/ui/ScoreRing";
+import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 import { getScoreClasses } from "@/constants";
 import type { AuthorStats, PRAnalysis, PRScore } from "@/types/scoring";
 
@@ -111,9 +112,10 @@ export function AuthorCard({ stats, prs, repoAvg }: AuthorCardProps) {
           <span className="text-xs font-medium text-text-muted">
             {t("avgScore")}
           </span>
-          <span className={`font-heading text-2xl font-bold ${totalTextClass}`}>
-            {stats.avgScores.total}
-          </span>
+          <AnimatedNumber
+            value={stats.avgScores.total}
+            className={`font-heading text-2xl font-bold ${totalTextClass}`}
+          />
         </div>
       </div>
 
@@ -187,6 +189,10 @@ export function AuthorCard({ stats, prs, repoAvg }: AuthorCardProps) {
                 name={t("authorAverage")}
                 fill="var(--color-primary)"
                 radius={[4, 4, 0, 0]}
+                isAnimationActive
+                animationBegin={200}
+                animationDuration={800}
+                animationEasing="ease-out"
               />
               <Bar
                 dataKey="repo"
@@ -194,6 +200,10 @@ export function AuthorCard({ stats, prs, repoAvg }: AuthorCardProps) {
                 fill="var(--color-text-muted)"
                 fillOpacity={0.5}
                 radius={[4, 4, 0, 0]}
+                isAnimationActive
+                animationBegin={350}
+                animationDuration={800}
+                animationEasing="ease-out"
               />
             </BarChart>
           </ResponsiveContainer>
@@ -204,16 +214,19 @@ export function AuthorCard({ stats, prs, repoAvg }: AuthorCardProps) {
             score={stats.avgScores.impact}
             size="sm"
             label={t("impact")}
+            animated
           />
           <ScoreRing
             score={stats.avgScores.aiLeverage}
             size="sm"
             label={t("aiLeverage")}
+            animated
           />
           <ScoreRing
             score={stats.avgScores.quality}
             size="sm"
             label={t("quality")}
+            animated
           />
         </div>
       )}

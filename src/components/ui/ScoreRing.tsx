@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { getScoreColor, getScoreClasses } from "@/constants";
+import { AnimatedNumber } from "./AnimatedNumber";
 
 interface ScoreRingProps {
   score: number;
@@ -79,9 +80,16 @@ export function ScoreRing({
           )}
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className={`font-bold ${fontSize} ${textColorClass}`}>
-            {score}
-          </span>
+          {animated ? (
+            <AnimatedNumber
+              value={score}
+              className={`font-bold ${fontSize} ${textColorClass}`}
+            />
+          ) : (
+            <span className={`font-bold ${fontSize} ${textColorClass}`}>
+              {score}
+            </span>
+          )}
         </div>
       </div>
       {label && (

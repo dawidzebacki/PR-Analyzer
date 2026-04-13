@@ -3,6 +3,11 @@
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Lightbulb, ArrowUp, Target, CheckCircle } from "lucide-react";
+import {
+  itemContainerVariants,
+  itemVariants,
+  sectionVariants,
+} from "@/lib/animations";
 
 interface RecommendationsProps {
   recommendations: string[];
@@ -16,12 +21,7 @@ export function Recommendations({ recommendations }: RecommendationsProps) {
   if (recommendations.length === 0) return null;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.5 }}
-      className="space-y-6"
-    >
+    <motion.div variants={sectionVariants} className="space-y-6">
       <div className="space-y-2">
         <h2 className="font-heading text-[1.5rem] font-bold leading-[1.875rem] tracking-[-0.0625rem] text-navy lg:text-[2rem] lg:leading-[2.375rem]">
           {t("recommendations")}
@@ -31,17 +31,18 @@ export function Recommendations({ recommendations }: RecommendationsProps) {
         </p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <motion.div
+        className="grid gap-4 md:grid-cols-2"
+        variants={itemContainerVariants}
+      >
         {recommendations.map((recommendation, index) => {
           const Icon = ICONS[index % ICONS.length];
 
           return (
             <motion.div
               key={`${index}-${recommendation.slice(0, 24)}`}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.6 + index * 0.08 }}
-              className="flex gap-4 rounded-xl border border-accent-green/20 bg-accent-green/5 p-6 shadow-sm"
+              variants={itemVariants}
+              className="flex gap-4 rounded-xl border border-accent-green/20 bg-accent-green/5 p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
             >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-green/15 text-accent-green">
                 <Icon className="h-5 w-5" />
@@ -52,7 +53,7 @@ export function Recommendations({ recommendations }: RecommendationsProps) {
             </motion.div>
           );
         })}
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

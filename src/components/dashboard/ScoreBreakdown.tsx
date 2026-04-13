@@ -13,8 +13,14 @@ import {
 import { Flame, Bot, ShieldCheck } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { ScoreRing } from "@/components/ui/ScoreRing";
+import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 import { SCORING_WEIGHTS, getScoreClasses } from "@/constants";
 import type { PRScore } from "@/types/scoring";
+import {
+  itemContainerVariants,
+  itemVariants,
+  sectionVariants,
+} from "@/lib/animations";
 
 interface ScoreBreakdownProps {
   scores: PRScore;
@@ -33,14 +39,14 @@ function ScoreBar({ score, label }: { score: number; label: string }) {
     <div className="space-y-1.5">
       <div className="flex items-center justify-between text-sm">
         <span className="font-medium text-navy">{label}</span>
-        <span className={`font-bold ${text}`}>{score}</span>
+        <AnimatedNumber value={score} className={`font-bold ${text}`} />
       </div>
       <div className="h-2.5 w-full overflow-hidden rounded-full bg-border">
         <motion.div
           className={`h-full rounded-full ${bg}`}
           initial={{ width: 0 }}
           animate={{ width: `${score}%` }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
         />
       </div>
     </div>
@@ -57,12 +63,7 @@ export function ScoreBreakdown({ scores }: ScoreBreakdownProps) {
   }));
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
-      className="space-y-6"
-    >
+    <motion.div variants={sectionVariants} className="space-y-6">
       <h2 className="font-heading text-[1.5rem] font-bold leading-[1.875rem] tracking-[-0.0625rem] text-navy lg:text-[2rem] lg:leading-[2.375rem]">
         {t("scoreBreakdown")}
       </h2>
@@ -91,6 +92,10 @@ export function ScoreBreakdown({ scores }: ScoreBreakdownProps) {
                 fill="var(--color-primary)"
                 fillOpacity={0.2}
                 strokeWidth={2}
+                isAnimationActive
+                animationBegin={300}
+                animationDuration={900}
+                animationEasing="ease-out"
               />
             </RadarChart>
           </ResponsiveContainer>
@@ -109,17 +114,15 @@ export function ScoreBreakdown({ scores }: ScoreBreakdownProps) {
       </div>
 
       {/* Dimension Cards */}
-      <div className="grid gap-6 md:grid-cols-3">
-        {DIMENSIONS.map((dim, index) => {
+      <motion.div
+        className="grid gap-6 md:grid-cols-3"
+        variants={itemContainerVariants}
+      >
+        {DIMENSIONS.map((dim) => {
           const Icon = dim.icon;
 
           return (
-            <motion.div
-              key={dim.key}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-            >
+            <motion.div key={dim.key} variants={itemVariants}>
               <Card className="flex flex-col items-center gap-4 text-center">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <Icon className="h-6 w-6" />
@@ -137,7 +140,7 @@ export function ScoreBreakdown({ scores }: ScoreBreakdownProps) {
             </motion.div>
           );
         })}
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

@@ -10,6 +10,7 @@ import {
 } from "@/components/dashboard/PRListControls";
 import { PRCard } from "@/components/dashboard/PRCard";
 import type { PRAnalysis } from "@/types/scoring";
+import { sectionVariants } from "@/lib/animations";
 
 interface PRListProps {
   prs: PRAnalysis[];
@@ -77,12 +78,7 @@ export function PRList({ prs, repoUrl }: PRListProps) {
   }, [prs, sortField, sortDirection, authorFilter, searchQuery]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.3 }}
-      className="space-y-6"
-    >
+    <motion.div variants={sectionVariants} className="space-y-6">
       <h2 className="font-heading text-[1.5rem] font-bold leading-[1.875rem] tracking-[-0.0625rem] text-navy lg:text-[2rem] lg:leading-[2.375rem]">
         {t(prs.length === 1 ? "pullRequest" : "pullRequests")}
       </h2>

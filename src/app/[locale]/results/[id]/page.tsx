@@ -2,8 +2,9 @@
 
 import { use } from "react";
 import { useSearchParams } from "next/navigation";
+import { motion } from "framer-motion";
 import { useResults, ResultsError } from "@/hooks/useResults";
-import { AnalysisLoading } from "@/components/dashboard/AnalysisLoading";
+import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
 import { RepoHeader } from "@/components/dashboard/RepoHeader";
 import { TotalScore } from "@/components/dashboard/TotalScore";
 import { ScoreBreakdown } from "@/components/dashboard/ScoreBreakdown";
@@ -13,6 +14,7 @@ import { Recommendations } from "@/components/dashboard/Recommendations";
 import { ShareBar } from "@/components/dashboard/ShareBar";
 import { ErrorState, type ErrorVariant } from "@/components/shared/ErrorState";
 import { Container } from "@/components/ui/Container";
+import { sectionContainerVariants } from "@/lib/animations";
 
 interface ResultsPageProps {
   params: Promise<{ locale: string; id: string }>;
@@ -52,7 +54,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
   const { data, isLoading, error } = useResults({ id });
 
   if (isLoading) {
-    return <AnalysisLoading />;
+    return <DashboardSkeleton />;
   }
 
   if (error) {
@@ -71,7 +73,12 @@ export default function ResultsPage({ params }: ResultsPageProps) {
     <>
       <ShareBar analysis={data} />
       <Container className="py-12 lg:py-16">
-        <div className="space-y-10">
+        <motion.div
+          className="space-y-10"
+          variants={sectionContainerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           <RepoHeader
             repoName={data.repoName}
             repoUrl={data.repoUrl}
@@ -92,7 +99,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
           />
 
           <Recommendations recommendations={data.recommendations} />
-        </div>
+        </motion.div>
       </Container>
     </>
   );
