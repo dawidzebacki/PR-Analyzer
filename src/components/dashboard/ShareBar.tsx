@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Share2, FileJson, ImageDown } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
 import { useToast } from "@/components/ui/Toast";
 import type { RepoAnalysis } from "@/types/scoring";
 
@@ -60,21 +61,23 @@ export function ShareBar({ analysis }: ShareBarProps) {
   }
 
   return (
-    <div className="sticky top-[66px] z-30 -mx-[18px] border-b border-border bg-surface/90 px-[18px] py-3 backdrop-blur-md lg:top-[100px]">
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end">
-        <Button variant="secondary" size="sm" onClick={handleShare}>
-          <Share2 className="mr-2 h-4 w-4" aria-hidden />
-          {t("shareResults")}
-        </Button>
-        <Button variant="secondary" size="sm" onClick={handleExportJson}>
-          <FileJson className="mr-2 h-4 w-4" aria-hidden />
-          {t("exportJson")}
-        </Button>
-        <Button variant="secondary" size="sm" onClick={handleExportBadge}>
-          <ImageDown className="mr-2 h-4 w-4" aria-hidden />
-          {t("exportBadge")}
-        </Button>
-      </div>
+    <div className="sticky top-[66px] z-30 border-b border-border bg-surface/90 py-3 backdrop-blur-md lg:top-[100px]">
+      <Container>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end">
+          <Button variant="secondary" size="sm" onClick={handleShare}>
+            <Share2 className="mr-2 h-4 w-4" aria-hidden />
+            {t("shareResults")}
+          </Button>
+          <Button variant="secondary" size="sm" onClick={handleExportJson}>
+            <FileJson className="mr-2 h-4 w-4" aria-hidden />
+            {t("exportJson")}
+          </Button>
+          <Button variant="secondary" size="sm" onClick={handleExportBadge}>
+            <ImageDown className="mr-2 h-4 w-4" aria-hidden />
+            {t("exportBadge")}
+          </Button>
+        </div>
+      </Container>
     </div>
   );
 }
