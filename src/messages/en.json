@@ -148,7 +148,14 @@
     "sortAuthorPrCount": "PR count",
     "sortAuthorScore": "Avg score",
     "recommendations": "Recommendations",
-    "recommendationsSubtitle": "AI-generated suggestions to improve your pull request practices."
+    "recommendationsSubtitle": "AI-generated suggestions to improve your pull request practices.",
+    "shareResults": "Share results",
+    "shareCopied": "Link copied to clipboard",
+    "exportJson": "Export JSON",
+    "exportJsonSuccess": "Downloaded analysis as JSON",
+    "exportBadge": "Export badge",
+    "exportBadgeSuccess": "Downloaded PNG badge",
+    "reanalyze": "Re-analyze repository"
   },
   "footer": {
     "description": "AI-powered GitHub pull request analysis tool.",
@@ -202,7 +209,11 @@
     "GITHUB_API_ERROR": "Failed to fetch data from GitHub. Please try again.",
     "TIMEOUT": "Analysis timed out. Please try again.",
     "INTERNAL_ERROR": "An unexpected error occurred. Please try again.",
-    "NETWORK_ERROR": "Network error. Please check your connection and try again."
+    "NETWORK_ERROR": "Network error. Please check your connection and try again.",
+    "CLIPBOARD_ERROR": "Couldn't copy to clipboard. Please copy the URL manually.",
+    "EXPORT_ERROR": "Export failed. Please try again.",
+    "EXPIRED_TITLE": "This analysis has expired",
+    "EXPIRED_DESCRIPTION": "Cached results are kept for one hour. Re-run the analysis to view this report again."
   },
   "language": {
     "en": "English",

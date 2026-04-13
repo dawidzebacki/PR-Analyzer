@@ -16,6 +16,8 @@ Will be distilled into README sections (Design Decisions, AI Usage, What I'd Do 
 - PR#19: Switched scoring LLM from Claude (claude-sonnet-4-20250514) to Gemini (gemini-2.0-flash) — Gemini has a free API tier, Claude required paid credits
 - feat/single-pr-analysis: Switched scoring LLM from Gemini to Groq (llama-3.3-70b-versatile) — faster inference, generous free tier
 - feat/single-pr-analysis: Reduced MAX_PRS_TO_ANALYZE from 20 to 5 — keeps prompts within model context and analysis snappy now that single-PR mode exists for deep dives
+- feat/dashboard-export-share: Share URL only encodes repoUrl (`?repo=`), not scope/typeFilter — RepoAnalysis doesn't persist those; on expired re-analyze user picks scope again via dialog
+- feat/dashboard-export-share: PNG badge canvas uses hex literals instead of design tokens — canvas has no Tailwind; values copied from CLAUDE.md token table
 
 ## Issues & Fixes
 
