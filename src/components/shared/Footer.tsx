@@ -2,7 +2,7 @@
 
 import { GitBranch } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 
 const GITHUB_URL = "https://github.com/dawidzebacki/PR-Analyzer";
@@ -50,6 +50,17 @@ function FooterLinkItem({ link, label }: { link: FooterLink; label: string }) {
 export function Footer() {
   const t = useTranslations("footer");
   const tCommon = useTranslations("common");
+  const pathname = usePathname();
+
+  function scrollToHero() {
+    const input = document.getElementById("hero-repo-url");
+    if (input) {
+      input.scrollIntoView({ behavior: "smooth", block: "center" });
+      window.setTimeout(() => input.focus({ preventScroll: true }), 300);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
 
   return (
     <footer className="border-t border-border bg-surface">
@@ -58,7 +69,16 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Logo + description */}
           <div className="lg:col-span-2">
-            <Link href="/" className="mb-4 flex items-center gap-2">
+            <Link
+              href="/"
+              className="mb-4 flex items-center gap-2"
+              onClick={(e) => {
+                if (pathname === "/") {
+                  e.preventDefault();
+                  scrollToHero();
+                }
+              }}
+            >
               <GitBranch className="h-6 w-6 text-primary" />
               <span className="text-lg font-semibold text-navy">
                 {tCommon("appName")}

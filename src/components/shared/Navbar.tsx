@@ -59,7 +59,16 @@ export function Navbar() {
     >
       <nav className="mx-auto flex h-[66px] max-w-[1440px] items-center justify-between px-[18px] lg:h-[100px] lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
+        <Link
+          href="/"
+          className="flex items-center gap-2"
+          onClick={(e) => {
+            if (pathname === "/") {
+              e.preventDefault();
+              scrollToHero();
+            }
+          }}
+        >
           <GitBranch className="h-6 w-6 text-primary" />
           <span className="text-lg font-semibold text-navy">
             {tCommon("appName")}
