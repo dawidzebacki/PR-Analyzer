@@ -2,7 +2,7 @@
 
 Score any public GitHub repository's pull requests on three dimensions — **Impact**, **AI-Leverage**, and **Quality** — using LLM-based analysis. Paste a repo URL, get a dashboard with per-PR scores, dimension breakdowns, top contributors, and concrete recommendations.
 
-**Live demo:** _TBD — link will be added after Vercel deployment._
+**Live demo:** https://dawid-zebacki-pr-analyzer.vercel.app/
 
 ---
 
@@ -157,7 +157,7 @@ Stories use Component Story Format 3 (`satisfies Meta<typeof Component>`) and co
 
 ## Live Demo
 
-_TBD — link will land here once Vercel deployment is live._
+https://dawid-zebacki-pr-analyzer.vercel.app/
 
 ---
 
