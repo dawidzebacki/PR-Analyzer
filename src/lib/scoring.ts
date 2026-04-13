@@ -190,6 +190,8 @@ export async function scorePullRequests(
       title: pr.title,
       author: pr.author,
       description: pr.description,
+      state: pr.state,
+      mergedAt: pr.mergedAt,
       filesChanged: pr.filesChanged,
       additions: pr.additions,
       deletions: pr.deletions,
