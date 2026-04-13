@@ -101,10 +101,10 @@
   },
   "dashboard": {
     "totalScore": "Wynik całkowity",
-    "above90": "Wyjątkowa",
-    "above70": "Mocna",
+    "above90": "Wyjątkowy",
+    "above70": "Mocny",
     "above40": "Do poprawy",
-    "below40": "Krytyczna",
+    "below40": "Krytyczny",
     "impact": "Wpływ",
     "impactDescription": "Wartość biznesowa i znaczące zmiany",
     "aiLeverage": "Wykorzystanie AI",
@@ -171,7 +171,7 @@
       "privacy": "Polityka prywatności",
       "terms": "Regulamin"
     },
-    "copyright": "© 2025 PR Analyzer. Zbudowane z AI."
+    "copyright": "© 2026 dawidzebacki PR Analyzer. Zbudowano z AI."
   },
   "privacy": {
     "title": "Polityka prywatności",
