@@ -249,5 +249,19 @@
   "language": {
     "en": "English",
     "pl": "Polski"
+  },
+  "seo": {
+    "siteName": "PR Analyzer",
+    "defaultTitle": "PR Analyzer — AI-Powered GitHub Pull Request Reviews",
+    "defaultDescription": "Analyze GitHub pull requests for Impact, AI-Leverage, and Quality. Get instant AI-powered scores, charts, and actionable insights for your team.",
+    "home": {
+      "title": "AI-Powered GitHub Pull Request Reviews",
+      "description": "Score any public GitHub repository's pull requests on Impact, AI-Leverage, and Quality. Free, instant, no login required."
+    },
+    "results": {
+      "title": "Analysis: {repo}",
+      "titlePr": "PR #{number} Analysis: {repo}",
+      "description": "AI-powered analysis of pull requests for {repo} — scored on Impact, AI-Leverage, and Quality."
+    }
   }
 }

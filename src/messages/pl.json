@@ -249,5 +249,19 @@
   "language": {
     "en": "English",
     "pl": "Polski"
+  },
+  "seo": {
+    "siteName": "PR Analyzer",
+    "defaultTitle": "PR Analyzer — Analiza Pull Requestów GitHub z AI",
+    "defaultDescription": "Analizuj pull requesty na GitHubie pod kątem wpływu, wykorzystania AI i jakości. Natychmiastowe oceny i praktyczne wnioski dla Twojego zespołu.",
+    "home": {
+      "title": "Analiza Pull Requestów GitHub z AI",
+      "description": "Oceń pull requesty dowolnego publicznego repozytorium GitHub pod kątem wpływu, wykorzystania AI i jakości. Za darmo, natychmiast, bez logowania."
+    },
+    "results": {
+      "title": "Analiza: {repo}",
+      "titlePr": "Analiza PR #{number}: {repo}",
+      "description": "Analiza pull requestów {repo} oparta na AI — oceniana pod kątem wpływu, wykorzystania AI i jakości."
+    }
   }
 }

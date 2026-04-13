@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { Inter, PT_Serif } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { Navbar } from "@/components/shared/Navbar";
 import { Footer } from "@/components/shared/Footer";
 import { Providers } from "@/components/shared/Providers";
+import { getSiteUrl } from "@/lib/siteUrl";
 import "../globals.css";
 
 const inter = Inter({
@@ -22,15 +23,62 @@ const ptSerif = PT_Serif({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "PR Analyzer — AI-Powered GitHub Pull Request Reviews",
-  description:
-    "Analyze GitHub pull requests for Impact, AI-Leverage, and Quality. Get instant AI-powered scores, charts, and actionable insights for your team.",
-};
-
 interface LocaleLayoutProps {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const safeLocale = hasLocale(routing.locales, locale)
+    ? locale
+    : routing.defaultLocale;
+  const t = await getTranslations({ locale: safeLocale, namespace: "seo" });
+  const siteUrl = getSiteUrl();
+  const siteName = t("siteName");
+  const title = t("defaultTitle");
+  const description = t("defaultDescription");
+  const ogLocale = safeLocale === "pl" ? "pl_PL" : "en_US";
+
+  return {
+    metadataBase: new URL(siteUrl),
+    title: {
+      default: title,
+      template: `%s | ${siteName}`,
+    },
+    description,
+    applicationName: siteName,
+    alternates: {
+      canonical: `/${safeLocale}`,
+      languages: {
+        en: "/en",
+        pl: "/pl",
+        "x-default": "/en",
+      },
+    },
+    openGraph: {
+      type: "website",
+      siteName,
+      title,
+      description,
+      url: `/${safeLocale}`,
+      locale: ogLocale,
+      alternateLocale: safeLocale === "pl" ? ["en_US"] : ["pl_PL"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
 }
 
 export default async function LocaleLayout({

@@ -63,8 +63,15 @@ export function ScoreBreakdown({ scores }: ScoreBreakdownProps) {
   }));
 
   return (
-    <motion.div variants={sectionVariants} className="space-y-6">
-      <h2 className="font-heading text-[1.5rem] font-bold leading-[1.875rem] tracking-[-0.0625rem] text-navy lg:text-[2rem] lg:leading-[2.375rem]">
+    <motion.section
+      variants={sectionVariants}
+      className="space-y-6"
+      aria-labelledby="score-breakdown-heading"
+    >
+      <h2
+        id="score-breakdown-heading"
+        className="font-heading text-[1.5rem] font-bold leading-[1.875rem] tracking-[-0.0625rem] text-navy lg:text-[2rem] lg:leading-[2.375rem]"
+      >
         {t("scoreBreakdown")}
       </h2>
 
@@ -141,6 +148,6 @@ export function ScoreBreakdown({ scores }: ScoreBreakdownProps) {
           );
         })}
       </motion.div>
-    </motion.div>
+    </motion.section>
   );
 }
