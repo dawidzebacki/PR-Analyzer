@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod/v4";
@@ -31,6 +32,8 @@ export function HeroForm({ inputPlaceholder, inputHint, ctaText }: HeroFormProps
   const tCommon = useTranslations("common");
   const tErrors = useTranslations("errors");
   const { analyze, isLoading, error } = useAnalyze();
+  const searchParams = useSearchParams();
+  const prefilledRepoUrl = searchParams.get("repo") ?? undefined;
 
   const [pendingRepoUrl, setPendingRepoUrl] = useState<string | null>(null);
 
@@ -40,6 +43,7 @@ export function HeroForm({ inputPlaceholder, inputHint, ctaText }: HeroFormProps
     formState: { errors },
   } = useForm<HeroFormData>({
     resolver: zodResolver(heroFormSchema),
+    defaultValues: prefilledRepoUrl ? { repoUrl: prefilledRepoUrl } : undefined,
   });
 
   function onSubmit(data: HeroFormData) {

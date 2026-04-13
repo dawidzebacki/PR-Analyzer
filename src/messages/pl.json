@@ -148,7 +148,14 @@
     "sortAuthorPrCount": "Liczba PR-ów",
     "sortAuthorScore": "Śr. wynik",
     "recommendations": "Rekomendacje",
-    "recommendationsSubtitle": "Sugestie od AI, jak ulepszyć praktyki pracy z pull requestami."
+    "recommendationsSubtitle": "Sugestie od AI, jak ulepszyć praktyki pracy z pull requestami.",
+    "shareResults": "Udostępnij wyniki",
+    "shareCopied": "Link skopiowany do schowka",
+    "exportJson": "Eksportuj JSON",
+    "exportJsonSuccess": "Pobrano analizę jako JSON",
+    "exportBadge": "Eksportuj odznakę",
+    "exportBadgeSuccess": "Pobrano odznakę PNG",
+    "reanalyze": "Przeanalizuj ponownie"
   },
   "footer": {
     "description": "Narzędzie do analizy pull requestów na GitHubie wspierane przez AI.",
@@ -202,7 +209,11 @@
     "GITHUB_API_ERROR": "Nie udało się pobrać danych z GitHuba. Spróbuj ponownie.",
     "TIMEOUT": "Analiza przekroczyła limit czasu. Spróbuj ponownie.",
     "INTERNAL_ERROR": "Wystąpił nieoczekiwany błąd. Spróbuj ponownie.",
-    "NETWORK_ERROR": "Błąd sieci. Sprawdź połączenie i spróbuj ponownie."
+    "NETWORK_ERROR": "Błąd sieci. Sprawdź połączenie i spróbuj ponownie.",
+    "CLIPBOARD_ERROR": "Nie udało się skopiować do schowka. Skopiuj URL ręcznie.",
+    "EXPORT_ERROR": "Eksport nie powiódł się. Spróbuj ponownie.",
+    "EXPIRED_TITLE": "Ta analiza wygasła",
+    "EXPIRED_DESCRIPTION": "Wyniki są przechowywane przez godzinę. Uruchom analizę ponownie, aby zobaczyć raport."
   },
   "language": {
     "en": "English",
