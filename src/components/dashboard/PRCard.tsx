@@ -65,7 +65,7 @@ export function PRCard({ pr, repoUrl }: PRCardProps) {
         {/* Size info + mini scores */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           {/* Size */}
-          <div className="flex items-center gap-3 text-sm text-text-muted">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-text-muted">
             <span className="flex items-center gap-1">
               <FileCode2 className="h-4 w-4" />
               {t("filesChanged", { count: pr.filesChanged })}
@@ -79,7 +79,7 @@ export function PRCard({ pr, repoUrl }: PRCardProps) {
           </div>
 
           {/* Mini score rings */}
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4 sm:flex-nowrap">
             <ScoreRing
               score={pr.scores.impact}
               size="sm"
@@ -102,23 +102,26 @@ export function PRCard({ pr, repoUrl }: PRCardProps) {
         </div>
 
         {/* Expandable summary + actions */}
-        <div className="flex items-center justify-between border-t border-border pt-3">
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-border pt-3">
           <button
             type="button"
             onClick={() => setExpanded(!expanded)}
-            className="flex items-center gap-1.5 text-sm font-medium text-text-muted hover:text-primary transition-colors"
+            className="flex min-w-0 flex-1 items-center gap-1.5 text-left text-sm font-medium text-text-muted hover:text-primary transition-colors"
           >
             <ChevronDown
-              className={`h-4 w-4 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
+              className={`h-4 w-4 flex-shrink-0 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
             />
-            {pr.summary.slice(0, 60)}{pr.summary.length > 60 && !expanded ? "..." : ""}
+            <span className="truncate">
+              {pr.summary.slice(0, 60)}
+              {pr.summary.length > 60 && !expanded ? "..." : ""}
+            </span>
           </button>
 
           <a
             href={diffUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-sm font-medium text-primary hover:text-primary-hover transition-colors"
+            className="flex flex-shrink-0 items-center gap-1 text-sm font-medium text-primary hover:text-primary-hover transition-colors"
           >
             {t("viewDiff")}
             <ExternalLink className="h-3.5 w-3.5" />

@@ -72,7 +72,7 @@ export function AnalysisScopeDialog({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-navy/40 backdrop-blur-sm px-4"
+          className="fixed inset-0 z-50 flex items-end justify-center bg-navy/40 backdrop-blur-sm sm:items-center sm:px-4"
           onClick={onClose}
           role="presentation"
         >
@@ -82,7 +82,7 @@ export function AnalysisScopeDialog({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="relative w-full max-w-lg rounded-xl bg-surface p-6 shadow-xl sm:p-8"
+            className="relative max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-t-2xl bg-surface p-6 shadow-xl sm:rounded-xl sm:p-8"
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
@@ -92,9 +92,9 @@ export function AnalysisScopeDialog({
               type="button"
               onClick={onClose}
               aria-label={t("close")}
-              className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full text-text-muted transition-colors hover:bg-border hover:text-navy cursor-pointer"
+              className="absolute right-3 top-3 inline-flex h-11 w-11 items-center justify-center rounded-full text-text-muted transition-colors hover:bg-border hover:text-navy cursor-pointer"
             >
-              <X className="h-4 w-4" />
+              <X className="h-5 w-5" />
             </button>
 
             <h2
@@ -124,7 +124,7 @@ export function AnalysisScopeDialog({
                       role="radio"
                       aria-checked={selected}
                       onClick={() => setScope(s)}
-                      className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors cursor-pointer ${
+                      className={`min-h-[44px] rounded-lg border px-3 py-2.5 text-sm font-medium transition-colors cursor-pointer ${
                         selected
                           ? "border-primary bg-primary text-white"
                           : "border-border bg-surface text-navy hover:border-primary/50"
@@ -155,7 +155,7 @@ export function AnalysisScopeDialog({
                       role="checkbox"
                       aria-checked={selected}
                       onClick={() => toggleType(type)}
-                      className={`rounded-full border px-3 py-1 text-xs font-semibold transition-colors cursor-pointer ${
+                      className={`min-h-[36px] rounded-full border px-3.5 py-2 text-sm font-semibold transition-colors cursor-pointer ${
                         selected
                           ? "border-primary bg-primary/10 text-primary"
                           : "border-border bg-surface text-text-secondary hover:border-primary/50"
@@ -169,10 +169,18 @@ export function AnalysisScopeDialog({
             </fieldset>
 
             <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
-              <Button variant="ghost" onClick={onClose}>
+              <Button
+                variant="ghost"
+                onClick={onClose}
+                className="w-full sm:w-auto"
+              >
                 {t("cancel")}
               </Button>
-              <Button variant="primary" onClick={handleSubmit}>
+              <Button
+                variant="primary"
+                onClick={handleSubmit}
+                className="w-full sm:w-auto"
+              >
                 {t("submit")}
               </Button>
             </div>

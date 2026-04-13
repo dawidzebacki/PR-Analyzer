@@ -50,7 +50,7 @@ export function PRListControls({
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:flex-wrap">
       {/* Search */}
-      <div className="relative flex-1 min-w-[200px]">
+      <div className="relative w-full min-w-0 sm:w-auto sm:flex-1 sm:min-w-[200px]">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" />
         <input
           type="text"
@@ -62,7 +62,7 @@ export function PRListControls({
       </div>
 
       {/* Sort */}
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         <label htmlFor="sort-field" className="text-sm font-medium text-text-muted whitespace-nowrap">
           {t("sortBy")}
         </label>
@@ -99,7 +99,7 @@ export function PRListControls({
       <select
         value={authorFilter}
         onChange={(e) => onAuthorFilterChange(e.target.value)}
-        className="rounded-lg border border-border bg-surface px-3 py-2.5 text-sm text-text outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/30"
+        className="w-full rounded-lg border border-border bg-surface px-3 py-2.5 text-sm text-text outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/30 sm:w-auto"
       >
         <option value="">{t("allAuthors")}</option>
         {authors.map((author) => (
