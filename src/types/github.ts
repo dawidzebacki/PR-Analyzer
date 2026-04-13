@@ -39,7 +39,8 @@ export interface ParsedPR {
   title: string;
   author: string;
   description: string;
-  mergedAt: string;
+  mergedAt: string | null;
+  state: "open" | "closed";
   filesChanged: number;
   additions: number;
   deletions: number;

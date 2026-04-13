@@ -19,8 +19,9 @@
   "hero": {
     "title": "Analizuj Pull Requesty z pomocą AI",
     "subtitle": "Uzyskaj natychmiastowe, wspierane przez AI informacje o jakości kodu, wpływie zmian i wykorzystaniu AI w Twoich pull requestach.",
-    "inputPlaceholder": "https://github.com/właściciel/repo",
-    "cta": "Analizuj repozytorium",
+    "inputPlaceholder": "https://github.com/właściciel/repo lub /pull/123",
+    "inputHint": "Wklej całe repozytorium albo pojedynczy pull request — zanalizujemy jedno i drugie.",
+    "cta": "Analizuj PR",
     "trust": "Darmowe • Bez logowania • Tylko publiczne repozytoria",
     "illustration": {
       "score": "Wynik",
@@ -75,14 +76,12 @@
   "cta": {
     "title": "Gotowy, by przeanalizować swoje PR-y?",
     "subtitle": "Wklej URL dowolnego publicznego repozytorium GitHub i uzyskaj analizę AI w kilka sekund.",
-    "inputPlaceholder": "https://github.com/właściciel/repo",
-    "button": "Analizuj repozytorium"
+    "inputPlaceholder": "https://github.com/właściciel/repo lub /pull/123",
+    "button": "Analizuj PR"
   },
   "preview": {
     "title": "Zobacz swój dashboard w akcji",
-    "subtitle": "Podgląd interaktywnego raportu, który otrzymasz — oceny, rozkład wymiarów i szczegóły na poziomie PR-ów.",
-    "overallScore": "Ocena ogólna",
-    "recentPRs": "Ostatnie Pull Requesty"
+    "subtitle": "Podgląd interaktywnego raportu, który otrzymasz — oceny, rozkład wymiarów i szczegóły na poziomie PR-ów."
   },
   "loading": {
     "step1": "Pobieranie pull requestów z GitHuba",
@@ -117,6 +116,7 @@
     "prCount": "{count} PR-ów przeanalizowanych",
     "viewOnGithub": "Zobacz na GitHubie",
     "weight": "Waga: {value}",
+    "pullRequest": "Pull Request",
     "pullRequests": "Pull Requesty",
     "sortBy": "Sortuj po",
     "sortTotal": "Wynik całkowity",
@@ -159,13 +159,33 @@
     },
     "copyright": "© 2025 PR Analyzer. Zbudowane z AI."
   },
+  "analysisScope": {
+    "title": "Co mamy przeanalizować?",
+    "subtitle": "Wybierz pull requesty do oceny. Węższe filtry przyspieszają analizę.",
+    "scopeLabel": "Zakres",
+    "scope": {
+      "all": "Wszystkie",
+      "merged": "Zmergowane",
+      "open": "Otwarte",
+      "closed": "Zamknięte"
+    },
+    "typesLabel": "Typy",
+    "typesHint": "Opcjonalne. Wybierz prefiksy conventional commits do filtrowania. Pusto = wszystkie typy.",
+    "cancel": "Anuluj",
+    "submit": "Analizuj",
+    "close": "Zamknij"
+  },
   "errors": {
-    "INVALID_URL": "Podaj prawidłowy URL repozytorium GitHub.",
+    "INVALID_URL": "Podaj prawidłowy URL repozytorium lub pull requesta GitHub.",
     "REPO_NOT_FOUND": "Repozytorium nie znalezione. Sprawdź URL i spróbuj ponownie.",
+    "PR_NOT_FOUND": "Pull request nie znaleziony. Sprawdź URL i spróbuj ponownie.",
     "ACCESS_DENIED": "To repozytorium jest prywatne. Można analizować tylko publiczne repozytoria.",
-    "RATE_LIMIT": "Osiągnięto limit zapytań. Spróbuj ponownie za minutę.",
+    "GITHUB_RATE_LIMIT": "Osiągnięto limit zapytań do GitHuba. Spróbuj ponownie później.",
+    "AI_RATE_LIMIT": "Osiągnięto limit zapytań do AI. Spróbuj ponownie za minutę.",
+    "AI_TOO_LARGE": "Zapytanie za duże dla modelu AI. Zawęź filtry i spróbuj ponownie.",
     "AI_ERROR": "Usługa AI jest tymczasowo niedostępna. Spróbuj ponownie.",
-    "NO_MERGED_PRS": "Nie znaleziono zmergowanych pull requestów w tym repozytorium.",
+    "AI_AUTH_ERROR": "Nie udało się uwierzytelnić usługi AI. Sprawdź klucz API.",
+    "NO_MERGED_PRS": "Żaden pull request nie pasuje do filtrów w tym repozytorium.",
     "GITHUB_API_ERROR": "Nie udało się pobrać danych z GitHuba. Spróbuj ponownie.",
     "TIMEOUT": "Analiza przekroczyła limit czasu. Spróbuj ponownie.",
     "INTERNAL_ERROR": "Wystąpił nieoczekiwany błąd. Spróbuj ponownie.",

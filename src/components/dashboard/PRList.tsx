@@ -84,20 +84,22 @@ export function PRList({ prs, repoUrl }: PRListProps) {
       className="space-y-6"
     >
       <h2 className="font-heading text-[1.5rem] font-bold leading-[1.875rem] tracking-[-0.0625rem] text-navy lg:text-[2rem] lg:leading-[2.375rem]">
-        {t("pullRequests")}
+        {t(prs.length === 1 ? "pullRequest" : "pullRequests")}
       </h2>
 
-      <PRListControls
-        sortField={sortField}
-        sortDirection={sortDirection}
-        authorFilter={authorFilter}
-        searchQuery={searchQuery}
-        authors={authors}
-        onSortFieldChange={setSortField}
-        onSortDirectionChange={setSortDirection}
-        onAuthorFilterChange={setAuthorFilter}
-        onSearchQueryChange={setSearchQuery}
-      />
+      {prs.length > 1 && (
+        <PRListControls
+          sortField={sortField}
+          sortDirection={sortDirection}
+          authorFilter={authorFilter}
+          searchQuery={searchQuery}
+          authors={authors}
+          onSortFieldChange={setSortField}
+          onSortDirectionChange={setSortDirection}
+          onAuthorFilterChange={setAuthorFilter}
+          onSearchQueryChange={setSearchQuery}
+        />
+      )}
 
       <div className="space-y-4">
         <AnimatePresence mode="popLayout">

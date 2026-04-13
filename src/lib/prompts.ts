@@ -36,21 +36,23 @@ Engineering quality of the PR:
 - 0-19: Very low quality or broken
 
 ## Response Format
-Respond with a JSON array. Each element corresponds to one PR (in the same order as provided):
+Respond with a JSON object containing a single key "prs" holding an array. Each element corresponds to one PR (in the same order as provided):
 \`\`\`json
-[
-  {
-    "number": 1,
-    "impact": 75,
-    "aiLeverage": 60,
-    "quality": 80,
-    "summary": "One sentence describing what the PR does and its strengths/weaknesses."
-  }
-]
+{
+  "prs": [
+    {
+      "number": 1,
+      "impact": 75,
+      "aiLeverage": 60,
+      "quality": 80,
+      "summary": "One sentence describing what the PR does and its strengths/weaknesses."
+    }
+  ]
+}
 \`\`\`
 
 IMPORTANT:
-- Return ONLY the JSON array, no markdown fences, no extra text.
+- Return ONLY the JSON object, no markdown fences, no extra text.
 - Scores must be integers 0-100.
 - The "number" field must match the PR number provided.
 - The "summary" must be concise (1-2 sentences max).
@@ -68,10 +70,14 @@ export function buildUserPrompt(prs: ParsedPR[]): string {
 
     const extraFiles = pr.files.length > 10 ? `\n(+${pr.files.length - 10} more files not shown)` : "";
 
+    const statusLine = pr.mergedAt
+      ? `- **Merged at:** ${pr.mergedAt}`
+      : `- **State:** ${pr.state} (not merged)`;
+
     return `---
 ## PR #${pr.number}: ${pr.title}
 - **Author:** ${pr.author}
-- **Merged at:** ${pr.mergedAt}
+${statusLine}
 - **Files changed:** ${pr.filesChanged} (+${pr.additions} -${pr.deletions})
 - **Description:** ${pr.description || "(no description)"}
 

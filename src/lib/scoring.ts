@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import Groq from "groq-sdk";
 import { z } from "zod/v4";
 
 import { SCORING_WEIGHTS, ANALYSIS_TIMEOUT_MS } from "@/constants";
@@ -11,29 +11,24 @@ import type {
 } from "@/types/scoring";
 import { SCORING_SYSTEM_PROMPT, buildUserPrompt } from "./prompts";
 
-// --- Gemini client ---
+// --- Groq client ---
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-
-const model = genAI.getGenerativeModel({
-  model: "gemini-2.0-flash",
-  systemInstruction: SCORING_SYSTEM_PROMPT,
-  generationConfig: {
-    responseMimeType: "application/json",
-  },
-});
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY! });
+const MODEL = "llama-3.3-70b-versatile";
 
 // --- Validation ---
 
-const llmResponseSchema = z.array(
-  z.object({
-    number: z.number().int(),
-    impact: z.number().min(0).max(100),
-    aiLeverage: z.number().min(0).max(100),
-    quality: z.number().min(0).max(100),
-    summary: z.string(),
-  }),
-);
+const llmResponseSchema = z.object({
+  prs: z.array(
+    z.object({
+      number: z.number().int(),
+      impact: z.number().min(0).max(100),
+      aiLeverage: z.number().min(0).max(100),
+      quality: z.number().min(0).max(100),
+      summary: z.string(),
+    }),
+  ),
+});
 
 // --- Score calculation ---
 
@@ -50,21 +45,22 @@ function calculateTotal(impact: number, aiLeverage: number, quality: number): nu
 async function callLLM(prs: ParsedPR[]): Promise<LLMScoringResponse[]> {
   const userPrompt = buildUserPrompt(prs);
 
-  const result = await model.generateContent(userPrompt);
-  const text = result.response.text();
+  const completion = await groq.chat.completions.create({
+    model: MODEL,
+    response_format: { type: "json_object" },
+    messages: [
+      { role: "system", content: SCORING_SYSTEM_PROMPT },
+      { role: "user", content: userPrompt },
+    ],
+  });
 
+  const text = completion.choices[0]?.message?.content ?? "";
   return parseLLMResponse(text);
 }
 
 function parseLLMResponse(text: string): LLMScoringResponse[] {
-  // Strip markdown fences if present
-  const cleaned = text
-    .replace(/^```(?:json)?\s*/m, "")
-    .replace(/\s*```\s*$/m, "")
-    .trim();
-
-  const parsed: unknown = JSON.parse(cleaned);
-  return llmResponseSchema.parse(parsed);
+  const parsed: unknown = JSON.parse(text);
+  return llmResponseSchema.parse(parsed).prs;
 }
 
 // --- Author stats ---

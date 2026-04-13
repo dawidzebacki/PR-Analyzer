@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
+import Groq from "groq-sdk";
 
 import { analyzeRequestSchema } from "@/schemas";
 import * as cache from "@/lib/cache";
 import {
-  parseRepoUrl,
-  fetchMergedPRs,
+  parseGitHubUrl,
+  fetchPRs,
+  fetchSinglePR,
   GitHubApiError,
   NoPullRequestsError,
+  PRNotFoundError,
   RateLimitError,
   RepoNotFoundError,
   RepoPrivateError,
@@ -26,10 +29,16 @@ export async function POST(request: Request) {
       );
     }
 
-    const { repoUrl } = parsed.data;
+    const { repoUrl, scope, typeFilter } = parsed.data;
+    const { owner, repo, prNumber } = parseGitHubUrl(repoUrl);
 
-    // Check cache first
-    const cacheKey = cache.generateKey(repoUrl);
+    // Build a cache variant so repo+scope+filter and PR URL all get distinct keys
+    const variant =
+      prNumber !== undefined
+        ? `pr=${prNumber}`
+        : `scope=${scope}&types=${(typeFilter ?? []).join(",")}`;
+
+    const cacheKey = cache.generateKey(repoUrl, variant);
     const cached = cache.get(cacheKey);
     if (cached) {
       return NextResponse.json<AnalyzeResponse>({
@@ -39,11 +48,14 @@ export async function POST(request: Request) {
       });
     }
 
-    const { owner, repo } = parseRepoUrl(repoUrl);
     const token = process.env.GITHUB_TOKEN;
 
-    // Fetch PRs and score them
-    const prs = await fetchMergedPRs(owner, repo, token);
+    // Fetch PRs (single or list) and score them
+    const prs =
+      prNumber !== undefined
+        ? await fetchSinglePR(owner, repo, prNumber, token)
+        : await fetchPRs(owner, repo, { scope, typeFilter }, token);
+
     const repoName = `${owner}/${repo}`;
 
     const result = await Promise.race([
@@ -73,6 +85,13 @@ function handleError(error: unknown): NextResponse<ApiResponse<never>> {
     );
   }
 
+  if (error instanceof PRNotFoundError) {
+    return NextResponse.json(
+      { success: false, error: error.message, code: "PR_NOT_FOUND" },
+      { status: 404 },
+    );
+  }
+
   if (error instanceof RepoPrivateError) {
     return NextResponse.json(
       { success: false, error: error.message, code: "ACCESS_DENIED" },
@@ -82,7 +101,7 @@ function handleError(error: unknown): NextResponse<ApiResponse<never>> {
 
   if (error instanceof RateLimitError) {
     return NextResponse.json(
-      { success: false, error: error.message, code: "RATE_LIMIT" },
+      { success: false, error: error.message, code: "GITHUB_RATE_LIMIT" },
       { status: 403 },
     );
   }
@@ -108,13 +127,25 @@ function handleError(error: unknown): NextResponse<ApiResponse<never>> {
     );
   }
 
-  // Gemini API errors (e.g. rate limit, auth)
-  if (error instanceof Error && error.message.includes("[GoogleGenerativeAI Error]")) {
-    const isRateLimit = error.message.includes("429") || error.message.includes("quota");
-    if (isRateLimit) {
+  // Groq API errors (e.g. rate limit, auth)
+  if (error instanceof Groq.APIError) {
+    console.error("[analyze] Groq error:", error.status, error.message);
+    if (error.status === 429) {
       return NextResponse.json(
-        { success: false, error: "AI rate limit reached. Please try again in a minute.", code: "RATE_LIMIT" },
+        { success: false, error: "AI rate limit reached. Please try again in a minute.", code: "AI_RATE_LIMIT" },
         { status: 429 },
+      );
+    }
+    if (error.status === 413) {
+      return NextResponse.json(
+        { success: false, error: "Request too large for AI model. Narrow your filters.", code: "AI_TOO_LARGE" },
+        { status: 413 },
+      );
+    }
+    if (error.status === 401 || error.status === 403) {
+      return NextResponse.json(
+        { success: false, error: "AI service authentication failed.", code: "AI_AUTH_ERROR" },
+        { status: 502 },
       );
     }
     return NextResponse.json(

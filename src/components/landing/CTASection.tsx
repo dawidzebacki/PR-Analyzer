@@ -1,14 +1,20 @@
 "use client";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod/v4";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { repoUrlSchema } from "@/schemas";
+import { isPRUrl } from "@/lib/url";
 import { useAnalyze, AnalyzeError } from "@/hooks/useAnalyze";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import {
+  AnalysisScopeDialog,
+  type AnalysisScopeSubmit,
+} from "@/components/ui/AnalysisScopeDialog";
 
 const ctaFormSchema = z.object({
   repoUrl: repoUrlSchema,
@@ -36,6 +42,8 @@ export function CTASection() {
   const tErrors = useTranslations("errors");
   const { analyze, isLoading, error } = useAnalyze();
 
+  const [pendingRepoUrl, setPendingRepoUrl] = useState<string | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -45,7 +53,17 @@ export function CTASection() {
   });
 
   function onSubmit(data: CTAFormData) {
-    analyze(data.repoUrl);
+    if (isPRUrl(data.repoUrl)) {
+      analyze({ repoUrl: data.repoUrl });
+    } else {
+      setPendingRepoUrl(data.repoUrl);
+    }
+  }
+
+  function handleScopeSubmit(values: AnalysisScopeSubmit) {
+    if (!pendingRepoUrl) return;
+    analyze({ repoUrl: pendingRepoUrl, ...values });
+    setPendingRepoUrl(null);
   }
 
   return (
@@ -99,6 +117,12 @@ export function CTASection() {
           </motion.div>
         </motion.div>
       </div>
+
+      <AnalysisScopeDialog
+        open={pendingRepoUrl !== null}
+        onClose={() => setPendingRepoUrl(null)}
+        onSubmit={handleScopeSubmit}
+      />
     </section>
   );
 }

@@ -15,7 +15,7 @@ Landing page style based on passport-photo.online (indigo/purple CTA, PT Serif h
 - **Storybook:** Storybook 10 (`@storybook/nextjs-vite`)
 - **Icons:** Lucide React
 - **i18n:** next-intl (prefix-based routing, en + pl)
-- **LLM:** Anthropic Claude API (claude-opus-4-6)
+- **LLM:** Groq API (`llama-3.3-70b-versatile`, JSON mode)
 - **Runtime/Package manager:** Bun
 - **Deploy:** Vercel
 

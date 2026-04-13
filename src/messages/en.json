@@ -19,8 +19,9 @@
   "hero": {
     "title": "Analyze Your GitHub PRs with AI",
     "subtitle": "Get instant AI-powered insights on code quality, impact, and AI usage across your pull requests.",
-    "inputPlaceholder": "https://github.com/owner/repo",
-    "cta": "Analyze Repository",
+    "inputPlaceholder": "https://github.com/owner/repo or /pull/123",
+    "inputHint": "Paste a whole repository or a single pull request — we'll analyze either.",
+    "cta": "Analyze PR",
     "trust": "Free • No login required • Public repos only",
     "illustration": {
       "score": "Score",
@@ -75,14 +76,12 @@
   "cta": {
     "title": "Ready to Analyze Your PRs?",
     "subtitle": "Paste any public GitHub repository URL and get AI-powered insights in seconds.",
-    "inputPlaceholder": "https://github.com/owner/repo",
-    "button": "Analyze Repository"
+    "inputPlaceholder": "https://github.com/owner/repo or /pull/123",
+    "button": "Analyze PR"
   },
   "preview": {
     "title": "See Your Dashboard in Action",
-    "subtitle": "A preview of the interactive report you'll get — scores, breakdowns, and PR-level insights at a glance.",
-    "overallScore": "Overall Score",
-    "recentPRs": "Recent Pull Requests"
+    "subtitle": "A preview of the interactive report you'll get — scores, breakdowns, and PR-level insights at a glance."
   },
   "loading": {
     "step1": "Fetching pull requests from GitHub",
@@ -117,6 +116,7 @@
     "prCount": "{count} PRs analyzed",
     "viewOnGithub": "View on GitHub",
     "weight": "Weight: {value}",
+    "pullRequest": "Pull Request",
     "pullRequests": "Pull Requests",
     "sortBy": "Sort by",
     "sortTotal": "Total Score",
@@ -159,13 +159,33 @@
     },
     "copyright": "© 2025 PR Analyzer. Built with AI."
   },
+  "analysisScope": {
+    "title": "What should we analyze?",
+    "subtitle": "Pick the pull requests you want scored. Narrow filters keep the analysis fast.",
+    "scopeLabel": "Scope",
+    "scope": {
+      "all": "All",
+      "merged": "Merged",
+      "open": "Open",
+      "closed": "Closed"
+    },
+    "typesLabel": "Types",
+    "typesHint": "Optional. Select one or more conventional-commit prefixes to filter by. Empty = all types.",
+    "cancel": "Cancel",
+    "submit": "Analyze",
+    "close": "Close"
+  },
   "errors": {
-    "INVALID_URL": "Please enter a valid GitHub repository URL.",
+    "INVALID_URL": "Please enter a valid GitHub repository or pull request URL.",
     "REPO_NOT_FOUND": "Repository not found. Please check the URL and try again.",
+    "PR_NOT_FOUND": "Pull request not found. Please check the URL and try again.",
     "ACCESS_DENIED": "This repository is private. Only public repositories can be analyzed.",
-    "RATE_LIMIT": "Rate limit reached. Please try again in a minute.",
+    "GITHUB_RATE_LIMIT": "GitHub rate limit reached. Please try again later.",
+    "AI_RATE_LIMIT": "AI rate limit reached. Please try again in a minute.",
+    "AI_TOO_LARGE": "Request too large for the AI model. Narrow your filters and try again.",
     "AI_ERROR": "AI service is temporarily unavailable. Please try again.",
-    "NO_MERGED_PRS": "No merged pull requests found in this repository.",
+    "AI_AUTH_ERROR": "AI service authentication failed. Please check the API key.",
+    "NO_MERGED_PRS": "No pull requests match your filters in this repository.",
     "GITHUB_API_ERROR": "Failed to fetch data from GitHub. Please try again.",
     "TIMEOUT": "Analysis timed out. Please try again.",
     "INTERNAL_ERROR": "An unexpected error occurred. Please try again.",
