@@ -8,6 +8,7 @@ import { TotalScore } from "@/components/dashboard/TotalScore";
 import { ScoreBreakdown } from "@/components/dashboard/ScoreBreakdown";
 import { PRList } from "@/components/dashboard/PRList";
 import { AuthorStats } from "@/components/dashboard/AuthorStats";
+import { Recommendations } from "@/components/dashboard/Recommendations";
 import { Container } from "@/components/ui/Container";
 
 interface ResultsPageProps {
@@ -53,6 +54,8 @@ export default function ResultsPage({ params }: ResultsPageProps) {
           prs={data.prs}
           repoAvg={data.scores}
         />
+
+        <Recommendations recommendations={data.recommendations} />
       </div>
     </Container>
   );

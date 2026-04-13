@@ -146,7 +146,9 @@
     "repoAverage": "Śr. repo",
     "sortAuthorName": "Nazwa",
     "sortAuthorPrCount": "Liczba PR-ów",
-    "sortAuthorScore": "Śr. wynik"
+    "sortAuthorScore": "Śr. wynik",
+    "recommendations": "Rekomendacje",
+    "recommendationsSubtitle": "Sugestie od AI, jak ulepszyć praktyki pracy z pull requestami."
   },
   "footer": {
     "description": "Narzędzie do analizy pull requestów na GitHubie wspierane przez AI.",
