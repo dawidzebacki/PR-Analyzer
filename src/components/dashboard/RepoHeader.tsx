@@ -27,7 +27,7 @@ export function RepoHeader({
   });
 
   return (
-    <motion.div variants={sectionVariants}>
+    <motion.header variants={sectionVariants}>
       <h1 className="font-heading text-[2rem] font-bold leading-[2.375rem] tracking-[-0.0625rem] text-navy lg:text-[3rem] lg:leading-[3.375rem] lg:tracking-[-0.1125rem]">
         {repoName}
       </h1>
@@ -57,6 +57,6 @@ export function RepoHeader({
           {t("prCount", { count: prCount })}
         </span>
       </div>
-    </motion.div>
+    </motion.header>
   );
 }

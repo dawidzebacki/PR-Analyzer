@@ -23,16 +23,19 @@ export function TotalScore({ score }: TotalScoreProps) {
   const tier = getScoreTier(score);
 
   return (
-    <motion.div variants={sectionVariants}>
+    <motion.section variants={sectionVariants} aria-labelledby="total-score-heading">
       <Card className="flex flex-col items-center gap-4 py-10">
         <ScoreRing score={score} size="lg" animated />
         <div className="flex flex-col items-center gap-2">
-          <h2 className="font-heading text-xl font-bold text-navy">
+          <h2
+            id="total-score-heading"
+            className="font-heading text-xl font-bold text-navy"
+          >
             {t("repoScore")}
           </h2>
           <Badge variant={tier.variant}>{t(tier.key)}</Badge>
         </div>
       </Card>
-    </motion.div>
+    </motion.section>
   );
 }

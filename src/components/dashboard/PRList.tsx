@@ -78,8 +78,15 @@ export function PRList({ prs, repoUrl }: PRListProps) {
   }, [prs, sortField, sortDirection, authorFilter, searchQuery]);
 
   return (
-    <motion.div variants={sectionVariants} className="space-y-6">
-      <h2 className="font-heading text-[1.5rem] font-bold leading-[1.875rem] tracking-[-0.0625rem] text-navy lg:text-[2rem] lg:leading-[2.375rem]">
+    <motion.section
+      variants={sectionVariants}
+      className="space-y-6"
+      aria-labelledby="pr-list-heading"
+    >
+      <h2
+        id="pr-list-heading"
+        className="font-heading text-[1.5rem] font-bold leading-[1.875rem] tracking-[-0.0625rem] text-navy lg:text-[2rem] lg:leading-[2.375rem]"
+      >
         {t(prs.length === 1 ? "pullRequest" : "pullRequests")}
       </h2>
 
@@ -100,16 +107,17 @@ export function PRList({ prs, repoUrl }: PRListProps) {
       <div className="space-y-4">
         <AnimatePresence mode="popLayout">
           {filteredAndSorted.map((pr) => (
-            <motion.div
+            <motion.article
               key={pr.number}
               layout
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.2 }}
+              aria-label={pr.title}
             >
               <PRCard pr={pr} repoUrl={repoUrl} />
-            </motion.div>
+            </motion.article>
           ))}
         </AnimatePresence>
 
@@ -123,6 +131,6 @@ export function PRList({ prs, repoUrl }: PRListProps) {
           </motion.p>
         )}
       </div>
-    </motion.div>
+    </motion.section>
   );
 }

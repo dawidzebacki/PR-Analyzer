@@ -58,9 +58,16 @@ export function AuthorStats({ authorStats, prs, repoAvg }: AuthorStatsProps) {
   const isSinglePrMode = prs.length === 1 && authorStats.length === 1;
 
   return (
-    <motion.div variants={sectionVariants} className="space-y-6">
+    <motion.section
+      variants={sectionVariants}
+      className="space-y-6"
+      aria-labelledby="authors-heading"
+    >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <h2 className="font-heading text-[1.5rem] font-bold leading-[1.875rem] tracking-[-0.0625rem] text-navy lg:text-[2rem] lg:leading-[2.375rem]">
+        <h2
+          id="authors-heading"
+          className="font-heading text-[1.5rem] font-bold leading-[1.875rem] tracking-[-0.0625rem] text-navy lg:text-[2rem] lg:leading-[2.375rem]"
+        >
           {t("authors")}
         </h2>
 
@@ -104,6 +111,6 @@ export function AuthorStats({ authorStats, prs, repoAvg }: AuthorStatsProps) {
           ))}
         </motion.div>
       )}
-    </motion.div>
+    </motion.section>
   );
 }

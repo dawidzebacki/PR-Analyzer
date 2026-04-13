@@ -21,9 +21,16 @@ export function Recommendations({ recommendations }: RecommendationsProps) {
   if (recommendations.length === 0) return null;
 
   return (
-    <motion.div variants={sectionVariants} className="space-y-6">
+    <motion.section
+      variants={sectionVariants}
+      className="space-y-6"
+      aria-labelledby="recommendations-heading"
+    >
       <div className="space-y-2">
-        <h2 className="font-heading text-[1.5rem] font-bold leading-[1.875rem] tracking-[-0.0625rem] text-navy lg:text-[2rem] lg:leading-[2.375rem]">
+        <h2
+          id="recommendations-heading"
+          className="font-heading text-[1.5rem] font-bold leading-[1.875rem] tracking-[-0.0625rem] text-navy lg:text-[2rem] lg:leading-[2.375rem]"
+        >
           {t("recommendations")}
         </h2>
         <p className="text-base text-text-muted lg:text-[1.125rem] lg:leading-[1.75rem]">
@@ -54,6 +61,6 @@ export function Recommendations({ recommendations }: RecommendationsProps) {
           );
         })}
       </motion.div>
-    </motion.div>
+    </motion.section>
   );
 }
