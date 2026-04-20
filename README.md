@@ -157,7 +157,7 @@ Stories use Component Story Format 3 (`satisfies Meta<typeof Component>`) and co
 
 ## Live Demo
 
-https://dawid-zebacki-pr-analyzer.vercel.app/
+[https://dawid-zebacki-pr-analyzer.vercel.app/](https://dawidzebacki-pr-analyzer.vercel.app/)
 
 ---
 
