@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import { readResult } from "@/lib/resultsStorage";
 import type { ApiResponse } from "@/types/api";
 import type { RepoAnalysis } from "@/types/scoring";
 
@@ -15,6 +16,9 @@ export class ResultsError extends Error {
 }
 
 async function fetchResults(id: string): Promise<RepoAnalysis> {
+  const cached = readResult(id);
+  if (cached) return cached;
+
   const res = await fetch(`/api/results/${encodeURIComponent(id)}`);
   const json: ApiResponse<RepoAnalysis> = await res.json();
 
