@@ -1,8 +1,10 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "@/i18n/navigation";
+import { storeResult } from "@/lib/resultsStorage";
 import type { AnalyzeResponse } from "@/types/api";
+import type { RepoAnalysis } from "@/types/scoring";
 import type { PRScope, PRTypePrefix } from "@/constants";
 
 export class AnalyzeError extends Error {
@@ -21,7 +23,9 @@ export interface AnalyzeParams {
   typeFilter?: PRTypePrefix[];
 }
 
-async function analyzeRepo(params: AnalyzeParams): Promise<{ id: string }> {
+async function analyzeRepo(
+  params: AnalyzeParams,
+): Promise<{ id: string; data: RepoAnalysis }> {
   let res: Response;
   try {
     res = await fetch("/api/analyze", {
@@ -39,15 +43,18 @@ async function analyzeRepo(params: AnalyzeParams): Promise<{ id: string }> {
     throw new AnalyzeError(json.error, json.code ?? "INTERNAL_ERROR");
   }
 
-  return { id: json.id };
+  return { id: json.id, data: json.data };
 }
 
 export function useAnalyze() {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: (params: AnalyzeParams) => analyzeRepo(params),
-    onSuccess: ({ id }) => {
+    onSuccess: ({ id, data }) => {
+      storeResult(id, data);
+      queryClient.setQueryData(["results", id], data);
       router.push(`/results/${id}`);
     },
   });
